@@ -27,18 +27,29 @@ when 'rhel', 'centos', 'amazon'
   end
 
   package 'stackdriver-agent'
-
-  service 'stackdriver-agent' do
-    supports :start => true, :stop => true, :status => true, :restart => true, :reload => true
-    action :enable
+when 'ubuntu'
+  apt_repository 'stackdriver' do
+    uri node[:stackdriver][:repo_url]
+    distribution node[:lsb][:codename]
+    components ['main']
+    key 'https://www.stackdriver.com/RPM-GPG-KEY-stackdriver'
   end
 
-  template '/etc/sysconfig/stackdriver' do
-    source 'stackdriver-agent.rhel.erb'
-    variables ({
-      :api_key => node[:stackdriver][:api_key],
-      :collectd => node[:stackdriver][:config_collectd]
-    })
-    notifies :restart, 'service[stackdriver-agent]', :immediately
+  package 'stackdriver-agent' do
+    response_file 'stackdriver-agent.seed.erb'
   end
+end
+
+service 'stackdriver-agent' do
+  supports :start => true, :stop => true, :status => true, :restart => true, :reload => true
+  action :enable
+end
+
+template node[:stackdriver][:config_path] do
+  source 'stackdriver-agent.erb'
+  variables ({
+    :api_key => node[:stackdriver][:api_key],
+    :collectd => node[:stackdriver][:config_collectd]
+  })
+  notifies :restart, 'service[stackdriver-agent]', :immediately
 end
