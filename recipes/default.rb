@@ -30,7 +30,7 @@ when 'rhel', 'centos', 'amazon'
 when 'ubuntu'
   apt_repository 'stackdriver' do
     uri node[:stackdriver][:repo_url]
-    distribution node[:lsb][:codename]
+    distribution node[:stackdriver][:repo_dist]
     components ['main']
     key 'https://www.stackdriver.com/RPM-GPG-KEY-stackdriver'
   end
