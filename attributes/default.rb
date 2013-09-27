@@ -20,3 +20,7 @@ when 'ubuntu'
     default[:stackdriver][:config_path] = '/etc/default/stackdriver-agent'
   end
 end
+default[:stackdriver][:plugin_config_path] =  '/opt/stackdriver/collectd/etc/collectd.d/'
+default[:stackdriver][:apache][:mod_status_url] = 'http://127.0.0.1/server-status?auto'
+default[:stackdriver][:apache][:user] = null
+default[:stackdriver][:apache][:password] = null
