@@ -30,7 +30,7 @@ template "#{node[:stackdriver][:plugins][:conf_dir]}elasticsearch.conf" do
     :url => node[:stackdriver][:plugins][:elasticsearch][:url]
   })
   only_if node[:stackdriver][:plugins][:elasticsearch][:enable]
-  notify :restart, "service[stackdriver-agent]", :delayed
+  notifies :restart, "service[stackdriver-agent]", :delayed
 end
 
 # MongoDB plugin
@@ -45,7 +45,7 @@ template "#{node[:stackdriver][:plugins][:conf_dir]}mongodb.conf" do
     :secondary_query => node[:stackdriver][:plugins][:mongodb][:secondary_query]
   })
   only_if node[:stackdriver][:plugins][:mongodb][:enable]
-  notify :restart, "service[stackdriver-agent]", :delayed
+  notifies :restart, "service[stackdriver-agent]", :delayed
 end
 
 # Nginx plugin
@@ -58,7 +58,7 @@ template "#{node[:stackdriver][:plugins][:conf_dir]}nginx.conf" do
     :password => node[:stackdriver][:plugins][:nginx][:password]
   })
   only_if node[:stackdriver][:plugins][:nginx][:enable]
-  notify :restart, "service[stackdriver-agent]", :delayed
+  notifies :restart, "service[stackdriver-agent]", :delayed
 end
 
 # Redis plugin
@@ -72,7 +72,7 @@ template "#{node[:stackdriver][:plugins][:conf_dir]}redis.conf" do
     :timeout => node[:stackdriver][:plugins][:redis][:timeout]
   })
   only_if node[:stackdriver][:plugins][:redis][:enable]
-  notify :restart, "service[stackdriver-agent]", :delayed
+  notifies :restart, "service[stackdriver-agent]", :delayed
 end
 
 
