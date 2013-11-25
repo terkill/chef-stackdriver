@@ -21,7 +21,7 @@
 # Elastic Search plugin
 
 package "yajil" do
-  only_if node[:stackdriver][:plugins][:elasticsearch][:enable]
+  only_if { node[:stackdriver][:plugins][:elasticsearch][:enable] }
 end
 
 template "#{node[:stackdriver][:plugins][:conf_dir]}elasticsearch.conf" do
@@ -29,7 +29,7 @@ template "#{node[:stackdriver][:plugins][:conf_dir]}elasticsearch.conf" do
   variables({
     :url => node[:stackdriver][:plugins][:elasticsearch][:url]
   })
-  only_if node[:stackdriver][:plugins][:elasticsearch][:enable]
+  only_if { node[:stackdriver][:plugins][:elasticsearch][:enable] }
   notifies :restart, "service[stackdriver-agent]", :delayed
 end
 
@@ -44,7 +44,7 @@ template "#{node[:stackdriver][:plugins][:conf_dir]}mongodb.conf" do
     :password => node[:stackdriver][:plugins][:mongodb][:password],
     :secondary_query => node[:stackdriver][:plugins][:mongodb][:secondary_query]
   })
-  only_if node[:stackdriver][:plugins][:mongodb][:enable]
+  only_if { node[:stackdriver][:plugins][:mongodb][:enable] }
   notifies :restart, "service[stackdriver-agent]", :delayed
 end
 
@@ -57,7 +57,7 @@ template "#{node[:stackdriver][:plugins][:conf_dir]}nginx.conf" do
     :username => node[:stackdriver][:plugins][:nginx][:username],
     :password => node[:stackdriver][:plugins][:nginx][:password]
   })
-  only_if node[:stackdriver][:plugins][:nginx][:enable]
+  only_if { node[:stackdriver][:plugins][:nginx][:enable] }
   notifies :restart, "service[stackdriver-agent]", :delayed
 end
 
@@ -71,7 +71,7 @@ template "#{node[:stackdriver][:plugins][:conf_dir]}redis.conf" do
     :port => node[:stackdriver][:plugins][:redis][:port],
     :timeout => node[:stackdriver][:plugins][:redis][:timeout]
   })
-  only_if node[:stackdriver][:plugins][:redis][:enable]
+  only_if { node[:stackdriver][:plugins][:redis][:enable] }
   notifies :restart, "service[stackdriver-agent]", :delayed
 end
 
