@@ -1,4 +1,4 @@
-default[:stackdriver][:plugins][:conf_dir] = "/opt/stackdriver/collectd/etc/collect.d/"
+default[:stackdriver][:plugins][:conf_dir] = "/opt/stackdriver/collectd/etc/collectd.d/"
 
 default[:stackdriver][:plugins][:elasticsearch][:enable] = false
 default[:stackdriver][:plugins][:elasticsearch][:url] = "http://localhost:9200/_cluster/nodes/_local/stats?all=true"
