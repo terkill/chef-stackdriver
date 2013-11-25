@@ -4,7 +4,7 @@ Handles the setup and installation of the stackdriver agent and plugins.
 
 # Requirements
 
-Supports CentOS, RHEL and Amazon linux distributions.
+Supports CentOS, RHEL, Amazon, and Ubuntu linux distributions.
 
 # Usage
 
@@ -61,3 +61,5 @@ stackdriver::plugins - handles plugin configuration for compatible collectd plug
 # Author
 
 Author:: TABLE XI (<sysadmins@tablexi.com>)
+
+Author:: Kevin Reedy (<kevin@bellycard.com>)

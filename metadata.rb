@@ -9,5 +9,7 @@ version          "0.2.0"
 system "centos"
 system "redhat"
 system "amazon"
+system "ubuntu"
 
 depends "yum"
+depends "apt"
