@@ -2,20 +2,17 @@
 LoadPlugin mongodb
 
 <Plugin "mongodb">
-    Host "<%= @host %>"
-    Port "<%= @port %>"
+  Host "<%= @host %>"
+  Port "<%= @port %>"
+  <% if @username -%>
+  User "<%= @usernmae %>"
+  <% end -%>
+  <% if @password -%>
+  Password "<%= @password %>"
+  <% end -%>
+  <% if @secondary_query -%>
 
-   #  If you restricted access to the database, you can
-   #  set the username and password here
-   <% if @username -%>
-   User "<%= @usernmae %>"
-   <% end -%>
-   <% if @password -%>
-   Password "<%= @password %>"
-   <% end -%>
-   <% if @secondary_query -%>
-
-   # For performance/eventually consistent trade-offs
-   AllowSecondaryQuery true
-   <% end -%>
+  # For performance/eventually consistent trade-offs
+  AllowSecondaryQuery true
+  <% end -%>
 </Plugin>
