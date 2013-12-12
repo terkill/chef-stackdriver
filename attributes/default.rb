@@ -1,5 +1,6 @@
 default[:stackdriver][:api_key] = ''
 default[:stackdriver][:config_collectd] = true
+default[:stackdriver][:enable] = true
 default[:stackdriver][:gpg_key] = 'https://www.stackdriver.com/RPM-GPG-KEY-stackdriver'
 case node[:platform]
 when 'amazon'
