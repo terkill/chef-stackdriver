@@ -25,6 +25,12 @@ enable - If set to false, the stackdriver agent will be disabled.  Default is tr
 
 `node[:stackdriver][:plugins]`
 
+### apache
+
+mod_status_url - Mod status URL for apache. Default = http://127.0.0.1/server-status?auto
+user - Mod status username for apache plugin.
+password - Mod status password for apache plugin.
+
 ### elasticcache
 
 enable - enable the elasticcache plugin. Default is false.
@@ -62,5 +68,3 @@ stackdriver::plugins - handles plugin configuration for compatible collectd plug
 # Author
 
 Author:: TABLE XI (<sysadmins@tablexi.com>)
-
-Author:: Kevin Reedy (<kevin@bellycard.com>)

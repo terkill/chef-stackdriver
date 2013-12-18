@@ -8,6 +8,34 @@ describe 'stackdriver::plugins' do
     expect(chef_run).to include_recipe('stackdriver::default')
   end
 
+  context 'apache' do
+    context 'disabled' do
+      before do
+        chef_run.converge(described_recipe)
+      end
+
+      it 'not create template' do
+        expect(chef_run).to_not create_template("#{chef_run.node[:stackdriver][:plugins][:conf_dir]}apache.conf")
+      end
+    end
+
+    context 'enabled' do
+      before do
+        chef_run.node.set[:stackdriver][:plugins][:apache][:enable] = true
+        chef_run.converge(described_recipe)
+      end
+
+      it 'create template' do
+        expect(chef_run).to create_template("#{chef_run.node[:stackdriver][:plugins][:conf_dir]}apache.conf")
+      end
+
+      it 'template notifies service restart' do
+        template = chef_run.template("#{chef_run.node[:stackdriver][:plugins][:conf_dir]}apache.conf")
+        expect(template).to notify('service[stackdriver-agent]').to(:restart).delayed
+      end
+    end
+  end
+
   context 'elastic search' do
     context 'disabled' do
       before do
@@ -43,6 +71,7 @@ describe 'stackdriver::plugins' do
       end
     end
   end
+
   context 'mongodb' do
     context 'disabled' do
       before do
@@ -70,6 +99,7 @@ describe 'stackdriver::plugins' do
       end
     end
   end
+
   context 'nginx' do
     context 'disabled' do
       before do
@@ -97,6 +127,7 @@ describe 'stackdriver::plugins' do
       end
     end
   end
+
   context 'redis' do
     context 'disabled' do
       before do

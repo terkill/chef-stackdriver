@@ -1,5 +1,10 @@
 default[:stackdriver][:plugins][:conf_dir] = "/opt/stackdriver/collectd/etc/collectd.d/"
 
+default[:stackdriver][:plugins][:apache][:enable] = false
+default[:stackdriver][:plugins][:apache][:mod_status_url] = 'http://127.0.0.1/server-status?auto'
+default[:stackdriver][:plugins][:apache][:user] = nil
+default[:stackdriver][:plugins][:apache][:password] = nil
+
 default[:stackdriver][:plugins][:elasticsearch][:enable] = false
 default[:stackdriver][:plugins][:elasticsearch][:url] = "http://localhost:9200/_cluster/nodes/_local/stats?all=true"
 
