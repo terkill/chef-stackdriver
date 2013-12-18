@@ -1,5 +1,9 @@
 # CHANGELOG for stackdriver
 
+## 0.3.3:
+
+* Added delete conf file resource.
+
 ## 0.3.2:
 
 * Added recipe to setup custom apache plugin

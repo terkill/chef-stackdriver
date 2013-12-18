@@ -19,6 +19,14 @@
 
 include_recipe('stackdriver::default')
 
+%w(apache elasticsearch mongodb nginx redis).each do |plugin|
+  file "#{node[:stackdriver][:plugins][:conf_dir]}#{plugin}.conf" do
+    action :delete
+    not_if { node[:stackdriver][:plugins][plugin][:enable] }
+    notifies :restart, "service[stackdriver-agent]", :delayed
+  end
+end
+
 # Apache plugin
 
 template "#{node[:stackdriver][:plugins][:conf_dir]}apache.conf" do
