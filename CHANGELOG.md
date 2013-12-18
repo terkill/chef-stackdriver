@@ -1,5 +1,9 @@
 # CHANGELOG for stackdriver
 
+## 0.3.2:
+
+* Added recipe to setup custom apache plugin
+
 ## 0.3.1:
 
 * fixed redhat platform name
@@ -16,4 +20,4 @@
 
 ## 0.1.0:
 
-* Intial release.
+* Initial release.

@@ -19,6 +19,19 @@
 
 include_recipe('stackdriver::default')
 
+# Apache plugin
+
+template "#{node[:stackdriver][:plugins][:conf_dir]}apache.conf" do
+  source "apache-conf.erb"
+  variables ({
+    :url => node[:stackdriver][:plugins][:apache][:mod_status_url],
+    :user => node[:stackdriver][:plugins][:apache][:user],
+    :password => node[:stackdriver][:plugins][:apache][:password]
+  })
+  only_if { node[:stackdriver][:plugins][:apache][:enable] }
+  notifies :restart, "service[stackdriver-agent]", :delayed
+end
+
 # Elastic Search plugin
 
 package "yajil" do
