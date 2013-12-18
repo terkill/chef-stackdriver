@@ -66,8 +66,9 @@ describe 'stackdriver::default' do
       expect(chef_run).not_to install_package('stackdriver-agent')
     end
 
-    it 'not to setup service' do
-      expect(chef_run).not_to enable_service('stackdriver-agent')
+    it 'to disable and stop service' do
+      expect(chef_run).to disable_service('stackdriver-agent')
+      expect(chef_run).to stop_service('stackdriver-agent')
     end
 
     it 'not to create stackdriver-agent config template' do

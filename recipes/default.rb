@@ -47,7 +47,7 @@ end
 
 service 'stackdriver-agent' do
   supports :start => true, :stop => true, :status => true, :restart => true, :reload => true
-  action (node[:stackdriver][:enable]) ? :enable : :disable
+  action (node[:stackdriver][:enable]) ? :enable : [:disable, :stop]
 end
 
 template node[:stackdriver][:config_path] do
