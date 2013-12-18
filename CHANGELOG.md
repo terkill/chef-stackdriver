@@ -1,8 +1,14 @@
 # CHANGELOG for stackdriver
 
+## 0.3.1:
+
+* fixed redhat platform name
+* added enable attribute
+
 ## 0.3.0:
 
 * Added collectd plugins (elasticcache, mongodb, nginx, redis)
+* added travis support
 
 ## 0.2.0:
 
