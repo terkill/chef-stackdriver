@@ -68,3 +68,7 @@ stackdriver::plugins - handles plugin configuration for compatible collectd plug
 # Author
 
 Author:: TABLE XI (<sysadmins@tablexi.com>)
+
+# Contributors
+
+Kevin Reedy (<kevin@bellycard.com>)
