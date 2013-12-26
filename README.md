@@ -72,4 +72,5 @@ Author:: TABLE XI (<sysadmins@tablexi.com>)
 
 # Contributors
 
-Kevin Reedy (<kevin@bellycard.com>)
+* Kevin Reedy (<kevin@bellycard.com>)
+* Enrico Stahn (<mail@enricostahn.com>)
