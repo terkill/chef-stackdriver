@@ -16,3 +16,6 @@ bin/*
 #RVM
 .ruby-version
 .ruby-gemset
+
+#IDE
+.idea/*
