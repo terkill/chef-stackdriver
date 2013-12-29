@@ -2,7 +2,7 @@ require 'chefspec'
 
 describe 'stackdriver::plugins' do
   let(:chef_run) { ChefSpec::Runner.new(platform: 'amazon', version: '2012.09') }
-  
+
   it 'include default recipe' do
     chef_run.converge(described_recipe)
     expect(chef_run).to include_recipe('stackdriver::default')
