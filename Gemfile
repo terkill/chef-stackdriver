@@ -14,4 +14,6 @@ group :dev do
   gem "fauxhai"
   gem 'gherkin',
     '= 2.11.6' # http://stackoverflow.com/a/15855623
+  gem 'rubocop',
+    '~> 0.15'
 end
