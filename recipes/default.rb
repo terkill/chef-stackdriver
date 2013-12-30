@@ -22,7 +22,7 @@ raise 'There does not appear to be a repository available for your platform.' un
 
 case node[:platform]
 when 'redhat', 'centos', 'amazon'
-  remote_file "/etc/yum.repos.d/stackdriver.repo" do
+  remote_file '/etc/yum.repos.d/stackdriver.repo' do
     source node[:stackdriver][:repo_url]
     only_if { node[:stackdriver][:enable] }
   end

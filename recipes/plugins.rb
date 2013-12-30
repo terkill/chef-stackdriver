@@ -30,35 +30,35 @@ end
 # Apache plugin
 
 template "#{node[:stackdriver][:plugins][:conf_dir]}apache.conf" do
-  source "apache-conf.erb"
+  source 'apache-conf.erb'
   variables ({
     :url => node[:stackdriver][:plugins][:apache][:mod_status_url],
     :user => node[:stackdriver][:plugins][:apache][:user],
     :password => node[:stackdriver][:plugins][:apache][:password]
   })
   only_if { node[:stackdriver][:plugins][:apache][:enable] }
-  notifies :restart, "service[stackdriver-agent]", :delayed
+  notifies :restart, 'service[stackdriver-agent]', :delayed
 end
 
 # Elastic Search plugin
 
-package "yajil" do
+package 'yajil' do
   only_if { node[:stackdriver][:plugins][:elasticsearch][:enable] }
 end
 
 template "#{node[:stackdriver][:plugins][:conf_dir]}elasticsearch.conf" do
-  source "elasticsearch.conf.erb"
+  source 'elasticsearch.conf.erb'
   variables({
     :url => node[:stackdriver][:plugins][:elasticsearch][:url]
   })
   only_if { node[:stackdriver][:plugins][:elasticsearch][:enable] }
-  notifies :restart, "service[stackdriver-agent]", :delayed
+  notifies :restart, 'service[stackdriver-agent]', :delayed
 end
 
 # MongoDB plugin
 
 template "#{node[:stackdriver][:plugins][:conf_dir]}mongodb.conf" do
-  source "mongodb.conf.erb"
+  source 'mongodb.conf.erb'
   variables({
     :host => node[:stackdriver][:plugins][:mongodb][:host],
     :port => node[:stackdriver][:plugins][:mongodb][:port],
@@ -67,26 +67,26 @@ template "#{node[:stackdriver][:plugins][:conf_dir]}mongodb.conf" do
     :secondary_query => node[:stackdriver][:plugins][:mongodb][:secondary_query]
   })
   only_if { node[:stackdriver][:plugins][:mongodb][:enable] }
-  notifies :restart, "service[stackdriver-agent]", :delayed
+  notifies :restart, 'service[stackdriver-agent]', :delayed
 end
 
 # Nginx plugin
 
 template "#{node[:stackdriver][:plugins][:conf_dir]}nginx.conf" do
-  source "nginx.conf.erb"
+  source 'nginx.conf.erb'
   variables({
     :url => node[:stackdriver][:plugins][:nginx][:url],
     :username => node[:stackdriver][:plugins][:nginx][:username],
     :password => node[:stackdriver][:plugins][:nginx][:password]
   })
   only_if { node[:stackdriver][:plugins][:nginx][:enable] }
-  notifies :restart, "service[stackdriver-agent]", :delayed
+  notifies :restart, 'service[stackdriver-agent]', :delayed
 end
 
 # Redis plugin
 
 template "#{node[:stackdriver][:plugins][:conf_dir]}redis.conf" do
-  source "redis.conf.erb"
+  source 'redis.conf.erb'
   variables({
     :redis_node => node[:stackdriver][:plugins][:redis][:node],
     :host => node[:stackdriver][:plugins][:redis][:host],
@@ -94,7 +94,7 @@ template "#{node[:stackdriver][:plugins][:conf_dir]}redis.conf" do
     :timeout => node[:stackdriver][:plugins][:redis][:timeout]
   })
   only_if { node[:stackdriver][:plugins][:redis][:enable] }
-  notifies :restart, "service[stackdriver-agent]", :delayed
+  notifies :restart, 'service[stackdriver-agent]', :delayed
 end
 
 
