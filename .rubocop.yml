@@ -1,0 +1,18 @@
+AllCops:
+  Excludes:
+    - vendor/**
+    - test/foodcritic/**
+
+AlignParameters:
+  Enabled: false
+Encoding:
+  Enabled: false
+HashSyntax:
+  Enabled: false
+LineLength:
+  Enabled: false
+MethodLength:
+  Max: 30
+# OpsWorks will break when curly braces are not used in template variables
+BracesAroundHashParameters:
+  Enabled: false
