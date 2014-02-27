@@ -3,6 +3,7 @@
 ## 0.3.4:
 
 * Add default :upgrade action.
+* Lock yum cookbook version.
 
 ## 0.3.3:
 

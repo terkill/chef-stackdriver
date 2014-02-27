@@ -11,5 +11,5 @@ system 'redhat'
 system 'amazon'
 system 'ubuntu'
 
-depends 'yum'
+depends 'yum', '~> 2.0'
 depends 'apt'
