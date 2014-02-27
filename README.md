@@ -16,6 +16,7 @@ To use the plugins, change the enable attribute to true and add the stackdriver:
 
 ## default
 
+* action - Install (:install) or install and ensure stackdriver_agent is the latest version (:upgrade).  Default :upgrade.
 * repo_url - location of the package repository.
 * api_key - set the api key from your stackdriver account.
 * config_collectd - should stackdriver handle collectd.conf autogeneration.  Default is true.

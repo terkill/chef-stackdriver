@@ -17,7 +17,7 @@ describe 'stackdriver::default' do
     end
 
     it 'install stackdriver-agent' do
-      expect(chef_run).to install_package('stackdriver-agent')
+      expect(chef_run).to upgrade_package('stackdriver-agent')
     end
   end
 
@@ -29,7 +29,7 @@ describe 'stackdriver::default' do
     end
 
     it 'install stackdriver-agent' do
-      expect(chef_run).to install_package('stackdriver-agent')
+      expect(chef_run).to upgrade_package('stackdriver-agent')
     end
   end
 
@@ -47,6 +47,18 @@ describe 'stackdriver::default' do
     it 'template should notify service' do
       template = chef_run.template(chef_run.node[:stackdriver][:config_path])
       expect(template).to notify('service[stackdriver-agent]').to(:restart)
+    end
+  end
+
+  context 'action' do
+    before do
+      @chef_run = ChefSpec::Runner.new(platform: 'amazon', version: '2012.09')
+      @chef_run.node.set[:stackdriver][:action] = :install
+      @chef_run.converge(described_recipe)
+    end
+
+    it 'only install package' do
+      expect(@chef_run).to install_package('stackdriver-agent')
     end
   end
 

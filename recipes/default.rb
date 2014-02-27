@@ -28,6 +28,7 @@ when 'redhat', 'centos', 'amazon'
   end
 
   package 'stackdriver-agent' do
+    action node[:stackdriver][:action]
     only_if { node[:stackdriver][:enable] }
   end
 when 'ubuntu'
@@ -40,6 +41,7 @@ when 'ubuntu'
   end
 
   package 'stackdriver-agent' do
+    action node[:stackdriver][:action]
     response_file 'stackdriver-agent.seed.erb'
     only_if { node[:stackdriver][:enable] }
   end

@@ -1,3 +1,4 @@
+default[:stackdriver][:action] = :upgrade
 default[:stackdriver][:api_key] = ''
 default[:stackdriver][:config_collectd] = true
 default[:stackdriver][:enable] = true
