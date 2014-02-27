@@ -1,5 +1,9 @@
 # CHANGELOG for stackdriver
 
+## 0.3.4:
+
+* Add default :upgrade action.
+
 ## 0.3.3:
 
 * Added delete conf file resource.
