@@ -1,4 +1,4 @@
-# stackdriver cookbook
+# [Stackdriver](http://www.stackdriver.com/) Chef cookbook
 
 Handles the setup and installation of the stackdriver agent and plugins.
 
@@ -74,4 +74,5 @@ Author:: TABLE XI (<sysadmins@tablexi.com>)
 # Contributors
 
 * Kevin Reedy (<kevin@bellycard.com>)
+* Christian Vozar (<christian@bellycard.com>)
 * Enrico Stahn (<mail@enricostahn.com>)
