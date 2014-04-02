@@ -26,7 +26,7 @@ describe 'stackdriver::default' do
     let(:chef_run) { ChefSpec::Runner.new(platform: 'ubuntu', version: '10.04').converge(described_recipe) }
 
     it 'create apt repo' do
-      pending 'apt_repository resource has no spec matcher'
+      expect(chef_run).to add_apt_repository('stackdriver')
     end
 
     it 'install stackdriver-agent' do
