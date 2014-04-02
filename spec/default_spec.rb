@@ -37,10 +37,6 @@ describe 'stackdriver::default' do
   context 'general configuration' do
     let(:chef_run) { ChefSpec::Runner.new(platform: 'amazon', version: '2012.09').converge(described_recipe) }
 
-    it 'setup service' do
-      expect(chef_run).to enable_service('stackdriver-agent')
-    end
-
     it 'create stackdriver-agent config template' do
       expect(chef_run).to create_template(chef_run.node[:stackdriver][:config_path])
     end
