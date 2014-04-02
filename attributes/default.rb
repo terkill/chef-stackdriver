@@ -16,7 +16,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-default[:stackdriver][:action] = :install
+default[:stackdriver][:action] = :upgrade
 default[:stackdriver][:api_key] = ''
 default[:stackdriver][:config_collectd] = true
 default[:stackdriver][:enable] = true
