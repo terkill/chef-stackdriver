@@ -1,4 +1,5 @@
 require 'chefspec'
+require 'chefspec/berkshelf'
 
 describe 'stackdriver::default' do
   context 'raise exception' do

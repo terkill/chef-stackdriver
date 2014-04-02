@@ -1,4 +1,5 @@
 require 'chefspec'
+require 'chefspec/berkshelf'
 
 describe 'stackdriver::plugins' do
   let(:chef_run) { ChefSpec::Runner.new(platform: 'amazon', version: '2012.09') }
