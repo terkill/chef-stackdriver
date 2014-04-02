@@ -1,8 +1,7 @@
-#
 # Cookbook Name:: stackdriver
 # Recipe:: plugins
 #
-# Copyright (C) 2013 TABLE_XI
+# Copyright (C) 2013-2014 TABLE_XI
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
