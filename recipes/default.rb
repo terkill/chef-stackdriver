@@ -16,7 +16,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-raise 'There does not appear to be a repository available for your platform.' unless node[:stackdriver][:repo_url]
+raise 'No package repository available for your platform.' unless node[:stackdriver][:repo_url]
 
 service 'stackdriver-agent' do
   supports :start => true, :stop => true, :status => true, :restart => true, :reload => true
