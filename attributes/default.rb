@@ -38,7 +38,6 @@ when 'ubuntu'
     default[:stackdriver][:repo_url] = 'http://repo.stackdriver.com/apt'
     default[:stackdriver][:repo_dist] = 'precise'
     default[:stackdriver][:config_path] = '/etc/default/stackdriver-agent'
-  end
   when '14.04'
     default[:stackdriver][:repo_url] = 'http://repo.stackdriver.com/apt'
     default[:stackdriver][:repo_dist] = 'trusty'
