@@ -7,7 +7,7 @@ describe 'stackdriver::default' do
 
     it 'when attributes for platform are not defined' do
       expect(Chef::Formatters::ErrorMapper).to_not receive(:file_load_failed)
-      expect { chef_run }.to raise_error('There does not appear to be a repository available for your platform.')
+      expect { chef_run }.to raise_error('No package repository available for your platform.')
     end
   end
   context 'fedora platform' do
