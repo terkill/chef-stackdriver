@@ -36,6 +36,7 @@ end
 case node[:platform_family]
 when 'rhel'
   remote_file '/etc/yum.repos.d/stackdriver.repo' do
+    mode 0644
     source node[:stackdriver][:repo_url]
     only_if { node[:stackdriver][:enable] }
   end
