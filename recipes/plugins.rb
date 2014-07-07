@@ -41,7 +41,7 @@ end
 
 # Elastic Search plugin
 
-package 'yajil' do
+package 'yajl' do
   only_if { node[:stackdriver][:plugins][:elasticsearch][:enable] }
 end
 

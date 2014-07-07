@@ -1,5 +1,13 @@
 # CHANGELOG for stackdriver
 
+## 0.3.9:
+
+* update elasticsearch package dependency
+
+## 0.3.8:
+
+* fix specs
+
 ## 0.3.6:
 
 * Remove dependency on response file for Debian installations.
