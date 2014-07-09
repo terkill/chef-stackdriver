@@ -84,6 +84,10 @@ end
 
 # Redis plugin
 
+package node[:stackdriver][:plugins][:redis][:package] do
+  only_if { node[:stackdriver][:plugins][:redis][:enable] }
+end
+
 template "#{node[:stackdriver][:plugins][:conf_dir]}redis.conf" do
   source 'redis.conf.erb'
   variables({

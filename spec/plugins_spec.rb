@@ -187,6 +187,10 @@ describe 'stackdriver::plugins' do
         chef_run.converge(described_recipe)
       end
 
+      it 'not install package' do
+        expect(chef_run).to_not install_package(chef_run.node[:stackdriver][:plugins][:redis][:package])
+      end
+
       it 'not create template' do
         expect(chef_run).to_not create_template("#{chef_run.node[:stackdriver][:plugins][:conf_dir]}redis.conf")
       end
@@ -205,6 +209,10 @@ describe 'stackdriver::plugins' do
       before do
         chef_run.node.set[:stackdriver][:plugins][:redis][:enable] = true
         chef_run.converge(described_recipe)
+      end
+
+      it 'install package' do
+        expect(chef_run).to install_package(chef_run.node[:stackdriver][:plugins][:redis][:package])
       end
 
       it 'to not delete conf file' do
