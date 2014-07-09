@@ -57,6 +57,7 @@ password - if a password is required for access.
 ### redis
 
 * enable - enable the redis plugin.  Default is false.
+* package - install redis package dependency
 * node - name of the redis node
 * host - location of the redis instance.
 * port - port for the redis instance.

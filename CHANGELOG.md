@@ -1,5 +1,10 @@
 # CHANGELOG for stackdriver
 
+## 0.4.0:
+
+* update redis package dependency.
+* add end of line character to template files.
+
 ## 0.3.9:
 
 * update elasticsearch package dependency
