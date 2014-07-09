@@ -56,8 +56,8 @@ describe 'stackdriver::plugins' do
         chef_run.converge(described_recipe)
       end
 
-      it 'not install yajil' do
-        expect(chef_run).to_not install_package('yajil')
+      it 'not install yajl' do
+        expect(chef_run).to_not install_package('yajl')
       end
 
       it 'not create template' do
@@ -84,8 +84,8 @@ describe 'stackdriver::plugins' do
         expect(chef_run).to_not delete_file("#{chef_run.node[:stackdriver][:plugins][:conf_dir]}elasticsearch.conf")
       end
 
-      it 'install yajil' do
-        expect(chef_run).to install_package('yajil')
+      it 'install yajl' do
+        expect(chef_run).to install_package('yajl')
       end
 
       it 'create template' do
