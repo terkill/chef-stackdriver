@@ -99,6 +99,47 @@ describe 'stackdriver::plugins' do
     end
   end
 
+  context 'memcached' do
+    context 'disabled' do
+      before do
+        chef_run.converge(described_recipe)
+      end
+
+      it 'not create template' do
+        expect(chef_run).to_not create_template("#{chef_run.node[:stackdriver][:plugins][:conf_dir]}memcached.conf")
+      end
+
+      it 'delete conf file' do
+        expect(chef_run).to delete_file("#{chef_run.node[:stackdriver][:plugins][:conf_dir]}memcached.conf")
+      end
+
+      it 'file notifies service restart' do
+        file = chef_run.file("#{chef_run.node[:stackdriver][:plugins][:conf_dir]}memcached.conf")
+        expect(file).to notify('service[stackdriver-agent]').to(:restart).delayed
+      end
+    end
+
+    context 'enabled' do
+      before do
+        chef_run.node.set[:stackdriver][:plugins][:memcached][:enable] = true
+        chef_run.converge(described_recipe)
+      end
+
+      it 'to not delete conf file' do
+        expect(chef_run).to_not delete_file("#{chef_run.node[:stackdriver][:plugins][:conf_dir]}memcached.conf")
+      end
+
+      it 'create template' do
+        expect(chef_run).to create_template("#{chef_run.node[:stackdriver][:plugins][:conf_dir]}memcached.conf")
+      end
+
+      it 'template notifies service restart' do
+        template = chef_run.template("#{chef_run.node[:stackdriver][:plugins][:conf_dir]}memcached.conf")
+        expect(template).to notify('service[stackdriver-agent]').to(:restart).delayed
+      end
+    end
+  end
+
   context 'mongodb' do
     context 'disabled' do
       before do
