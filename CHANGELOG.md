@@ -1,5 +1,11 @@
 # CHANGELOG for stackdriver
 
+## 0.4.1:
+
+* update berkshelf to version 3
+* update rubocop and fix syntax
+* add memcache plugin
+
 ## 0.4.0:
 
 * update redis package dependency.
