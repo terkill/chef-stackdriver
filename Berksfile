@@ -1,6 +1,6 @@
-site :opscode
-
-cookbook 'apt', git: 'https://github.com/opscode-cookbooks/apt.git'
-cookbook 'yum', git: 'https://github.com/opscode-cookbooks/yum.git'
+source 'https://supermarket.getchef.com'
 
 metadata
+
+cookbook 'apt', github: 'opscode-cookbooks/apt'
+cookbook 'yum', github: 'opscode-cookbooks/yum'
