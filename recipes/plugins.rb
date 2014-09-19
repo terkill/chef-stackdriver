@@ -22,7 +22,7 @@ include_recipe('stackdriver::default')
   file "#{node[:stackdriver][:plugins][:conf_dir]}#{plugin}.conf" do
     action :delete
     not_if { node[:stackdriver][:plugins][plugin][:enable] }
-    notifies :restart, "service[stackdriver-agent]", :delayed
+    notifies :restart, 'service[stackdriver-agent]', :delayed
   end
 end
 
@@ -30,11 +30,11 @@ end
 
 template "#{node[:stackdriver][:plugins][:conf_dir]}apache.conf" do
   source 'apache-conf.erb'
-  variables ({
+  variables(
     :url => node[:stackdriver][:plugins][:apache][:mod_status_url],
     :user => node[:stackdriver][:plugins][:apache][:user],
     :password => node[:stackdriver][:plugins][:apache][:password]
-  })
+  )
   only_if { node[:stackdriver][:plugins][:apache][:enable] }
   notifies :restart, 'service[stackdriver-agent]', :delayed
 end
@@ -47,9 +47,9 @@ end
 
 template "#{node[:stackdriver][:plugins][:conf_dir]}elasticsearch.conf" do
   source 'elasticsearch.conf.erb'
-  variables({
+  variables(
     :url => node[:stackdriver][:plugins][:elasticsearch][:url]
-  })
+  )
   only_if { node[:stackdriver][:plugins][:elasticsearch][:enable] }
   notifies :restart, 'service[stackdriver-agent]', :delayed
 end
@@ -58,13 +58,13 @@ end
 
 template "#{node[:stackdriver][:plugins][:conf_dir]}mongodb.conf" do
   source 'mongodb.conf.erb'
-  variables({
+  variables(
     :host => node[:stackdriver][:plugins][:mongodb][:host],
     :port => node[:stackdriver][:plugins][:mongodb][:port],
     :username => node[:stackdriver][:plugins][:mongodb][:username],
     :password => node[:stackdriver][:plugins][:mongodb][:password],
     :secondary_query => node[:stackdriver][:plugins][:mongodb][:secondary_query]
-  })
+  )
   only_if { node[:stackdriver][:plugins][:mongodb][:enable] }
   notifies :restart, 'service[stackdriver-agent]', :delayed
 end
@@ -73,11 +73,11 @@ end
 
 template "#{node[:stackdriver][:plugins][:conf_dir]}nginx.conf" do
   source 'nginx.conf.erb'
-  variables({
+  variables(
     :url => node[:stackdriver][:plugins][:nginx][:url],
     :username => node[:stackdriver][:plugins][:nginx][:username],
     :password => node[:stackdriver][:plugins][:nginx][:password]
-  })
+  )
   only_if { node[:stackdriver][:plugins][:nginx][:enable] }
   notifies :restart, 'service[stackdriver-agent]', :delayed
 end
@@ -90,25 +90,22 @@ end
 
 template "#{node[:stackdriver][:plugins][:conf_dir]}redis.conf" do
   source 'redis.conf.erb'
-  variables({
+  variables(
     :redis_node => node[:stackdriver][:plugins][:redis][:node],
     :host => node[:stackdriver][:plugins][:redis][:host],
     :port => node[:stackdriver][:plugins][:redis][:port],
     :timeout => node[:stackdriver][:plugins][:redis][:timeout]
-  })
+  )
   only_if { node[:stackdriver][:plugins][:redis][:enable] }
   notifies :restart, 'service[stackdriver-agent]', :delayed
 end
 
 template "#{node[:stackdriver][:plugins][:conf_dir]}memcached.conf" do
   source 'memcached.conf.erb'
-  variables({
+  variables(
     :host => node[:stackdriver][:plugins][:memcached][:host],
     :port => node[:stackdriver][:plugins][:memcached][:port]
-  })
+  )
   only_if { node[:stackdriver][:plugins][:memcached][:enable] }
   notifies :restart, 'service[stackdriver-agent]', :delayed
 end
-
-
-

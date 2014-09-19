@@ -20,15 +20,15 @@ raise 'No package repository available for your platform.' unless node[:stackdri
 
 service 'stackdriver-agent' do
   supports :start => true, :stop => true, :status => true, :restart => true, :reload => true
-  action (node[:stackdriver][:enable]) ? :nothing : [:disable, :stop]
+  action((node[:stackdriver][:enable]) ? :nothing : [:disable, :stop])
 end
 
 template node[:stackdriver][:config_path] do
   source 'stackdriver-agent.erb'
-  variables ({
+  variables(
     :api_key => node[:stackdriver][:api_key],
     :collectd => node[:stackdriver][:config_collectd]
-  })
+  )
   notifies :restart, 'service[stackdriver-agent]', :delayed
   only_if { node[:stackdriver][:enable] }
 end
