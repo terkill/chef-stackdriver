@@ -49,3 +49,7 @@ default[:stackdriver][:plugins][:mongodb][:port] = '27017'
 default[:stackdriver][:plugins][:mongodb][:username] = false
 default[:stackdriver][:plugins][:mongodb][:password] = false
 default[:stackdriver][:plugins][:mongodb][:secondary_query] = false
+
+default[:stackdriver][:plugins][:memcached][:enable] = false
+default[:stackdriver][:plugins][:memcached][:host] = 'localhost'
+default[:stackdriver][:plugins][:memcached][:port] = '11211'

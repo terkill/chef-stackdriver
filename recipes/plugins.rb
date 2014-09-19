@@ -100,6 +100,15 @@ template "#{node[:stackdriver][:plugins][:conf_dir]}redis.conf" do
   notifies :restart, 'service[stackdriver-agent]', :delayed
 end
 
+template "#{node[:stackdriver][:plugins][:conf_dir]}memcached.conf" do
+  source 'memcached.conf.erb'
+  variables({
+    :host => node[:stackdriver][:plugins][:memcached][:host],
+    :port => node[:stackdriver][:plugins][:memcached][:port]
+  })
+  only_if { node[:stackdriver][:plugins][:memcached][:enable] }
+  notifies :restart, 'service[stackdriver-agent]', :delayed
+end
 
 
 

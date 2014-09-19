@@ -38,6 +38,12 @@ To use the plugins, change the enable attribute to true and add the stackdriver:
 * enable - enable the elasticcache plugin. Default is false.
 * url - elastic search status url
 
+### memcached
+
+* enable - enable the memcached plugin.  Default is false.
+* host - location of the memcached instance.
+* port - port for the memcached instance.
+
 ### mongodb
 
 * enable - enable the mongodb plugin. Default is false.
