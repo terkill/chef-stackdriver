@@ -71,3 +71,12 @@ execute 'generate hostid' do
   only_if { node[:stackdriver][:gen_hostid] }
   notifies :restart, 'service[stackdriver-agent]', :delayed
 end
+
+template '/opt/stackdriver/extractor/etc/extractor.conf.d/tags.conf' do
+  source 'tags.conf.erb'
+  variables(
+    :tags => node[:stackdriver][:tags]
+  )
+  not_if { node[:stackdriver][:tags].empty? }
+  notifies :restart, 'service[stackdriver-agent]', :delayed
+end

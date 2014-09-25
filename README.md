@@ -22,6 +22,7 @@ To use the plugins, change the enable attribute to true and add the stackdriver:
 * config_collectd - should stackdriver handle collectd.conf autogeneration.  Default is true.
 * enable - If set to false, the stackdriver agent will be disabled.  Default is true.
 * gen_hostid - generate a host id. [Link](http://support.stackdriver.com/customer/portal/articles/1491718-server-monitoring-beta-)
+* tags - set tags for your instance. [Link](http://support.stackdriver.com/customer/portal/articles/1491718-server-monitoring-beta-)
 
 ## plugins
 

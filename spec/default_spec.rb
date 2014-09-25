@@ -85,6 +85,34 @@ describe 'stackdriver::default' do
     end
   end
 
+  context 'tags' do
+    let(:chef_run) { ChefSpec::Runner.new(platform: 'amazon', version: '2012.09') }
+
+    it 'do not create template' do
+      chef_run.converge(described_recipe)
+
+      expect(chef_run).not_to create_template('/opt/stackdriver/extractor/etc/extractor.conf.d/tags.conf')
+    end
+
+    context 'template' do
+      before do
+        chef_run.node.set[:stackdriver][:tags] = {
+          'test1' => '1',
+          'test2' => '2'
+        }
+        chef_run.converge(described_recipe)
+      end
+
+      it 'create' do
+        expect(chef_run).to create_template('/opt/stackdriver/extractor/etc/extractor.conf.d/tags.conf')
+      end
+
+      it 'include test1=1' do
+        expect(chef_run).to render_file('/opt/stackdriver/extractor/etc/extractor.conf.d/tags.conf').with_content(/^test1=1$/)
+      end
+    end
+  end
+
   context 'disable' do
     let(:chef_run) { ChefSpec::Runner.new(platform: 'amazon', version: '2012.09') }
 
