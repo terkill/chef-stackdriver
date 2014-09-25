@@ -1,0 +1,44 @@
+---
+driver:
+  name: vagrant
+
+provisioner:
+  require_chef_omnibus: true
+  name: chef_zero
+
+platforms:
+  - name: centos-6.5
+
+suites:
+  - name: default
+    run_list:
+      - recipe[stackdriver::default]
+    attributes:
+      stackdriver:
+        api_key: '12345'
+        gen_hostid: true
+        tags:
+          test1: 1
+          test2: 2
+  - name: plugins
+    run_list:
+      - recipe[yum-epel::default]
+      - recipe[stackdriver::default]
+      - recipe[stackdriver::plugins]
+    attributes:
+      stackdriver:
+        api_key: '12345'
+        gen_hostid: true
+        plugins:
+          apache:
+            enable: true
+          elasticsearch:
+            enable: true
+          memcached:
+            enable: true
+          mongodb:
+            enable: true
+          nginx:
+            enable: true
+          redis:
+            enable: true

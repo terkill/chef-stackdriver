@@ -7,3 +7,9 @@ group :dev do
   gem 'chefspec'
   gem 'rubocop'
 end
+
+group :kitchen do
+  gem 'test-kitchen'
+  gem 'chef-zero'
+  gem 'kitchen-vagrant'
+end

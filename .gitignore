@@ -1,21 +1,31 @@
-.vagrant
-Berksfile.lock
-*~
-*#
-.#*
-\#*#
-.*.sw[a-z]
-*.un~
-/cookbooks
+.rake_test_cache
 
+.DS_Store
+*~
 # Bundler
 Gemfile.lock
-bin/*
-.bundle/*
 
 #RVM
+.rvmrc
 .ruby-version
 .ruby-gemset
 
-#IDE
-.idea/*
+.bundle
+.cache
+.kitchen
+
+tmp/*
+
+Vagrantfile
+tests/*
+test/*
+.vagrant
+
+.berkshelf/*
+
+# ignore cookbook berksfile lock
+Berksfile.lock
+
+# test-kitchen
+.kitchen/
+.kitchen.local.yml
