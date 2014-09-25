@@ -100,6 +100,8 @@ template "#{node[:stackdriver][:plugins][:conf_dir]}redis.conf" do
   notifies :restart, 'service[stackdriver-agent]', :delayed
 end
 
+# Memcache plugin
+
 template "#{node[:stackdriver][:plugins][:conf_dir]}memcached.conf" do
   source 'memcached.conf.erb'
   variables(
