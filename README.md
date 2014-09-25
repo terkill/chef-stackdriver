@@ -1,5 +1,7 @@
 # [Stackdriver](http://www.stackdriver.com/) Chef cookbook
 
+[![Build Status](http://img.shields.io/travis/tablexi/chef-stackdriver.svg)][travis]
+
 Handles the setup and installation of the stackdriver agent and plugins.
 
 # Requirements
