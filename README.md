@@ -74,6 +74,24 @@ password - if a password is required for access.
 stackdriver::default - sets up the repository and installs the stackdriver agent.
 stackdriver::plugins - handles plugin configuration for compatible collectd plugins.
 
+# Development
+
+1. Fork the repository from GitHub.
+2. Clone your fork to your local machine:
+
+        $ git clone git@github.com:USER/chefspec.git
+
+3. Create a git branch
+
+        $ git checkout -b my_bug_fix
+
+4. Run guard: `guard`
+5. **Write tests**
+6. Make your changes/patches/fixes, committing appropriately
+7. Run `kitchen test`
+8. Push your changes to GitHub
+9. Open a Pull Request
+
 # Author
 
 Author:: TABLE XI (<sysadmins@tablexi.com>)
