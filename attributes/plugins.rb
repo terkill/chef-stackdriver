@@ -37,7 +37,7 @@ default[:stackdriver][:plugins][:redis][:host] = 'localhost'
 default[:stackdriver][:plugins][:redis][:port] = '6379'
 default[:stackdriver][:plugins][:redis][:timeout] = 2000
 default[:stackdriver][:plugins][:redis][:package] =
-case node['platform_family']
+case node[:platform_family]
 when 'debian'
   'libhiredis0.10'
 when 'rhel', 'fedora', 'suse'
