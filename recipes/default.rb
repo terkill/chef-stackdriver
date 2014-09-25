@@ -64,3 +64,10 @@ when 'debian'
     only_if { node[:stackdriver][:enable] }
   end
 end
+
+execute 'generate hostid' do
+  command "/opt/stackdriver/stack-config --api-key #{node[:stackdriver][:api_key]} --genhostid"
+  not_if { File.exist? '/opt/stackdriver/hostid' }
+  only_if { node[:stackdriver][:gen_hostid] }
+  notifies :restart, 'service[stackdriver-agent]', :delayed
+end

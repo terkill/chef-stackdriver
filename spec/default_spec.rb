@@ -59,6 +59,32 @@ describe 'stackdriver::default' do
     end
   end
 
+  context 'gen_hostid' do
+    let(:chef_run) { ChefSpec::Runner.new(platform: 'amazon', version: '2012.09') }
+
+    it 'do not execute generate hostid' do
+      chef_run.converge(described_recipe)
+
+      expect(chef_run).not_to run_execute('generate hostid')
+    end
+
+    context 'execute' do
+      before do
+        chef_run.node.set[:stackdriver][:gen_hostid] = true
+        chef_run.converge(described_recipe)
+      end
+
+      it 'generate hostid' do
+        expect(chef_run).to run_execute('generate hostid')
+      end
+
+      it 'notify stackdriver service to restart' do
+        exec = chef_run.execute('generate hostid')
+        expect(exec).to notify('service[stackdriver-agent]').to(:restart)
+      end
+    end
+  end
+
   context 'disable' do
     let(:chef_run) { ChefSpec::Runner.new(platform: 'amazon', version: '2012.09') }
 
