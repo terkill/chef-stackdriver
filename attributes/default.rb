@@ -27,7 +27,7 @@ case node[:platform]
 when 'amazon'
   default[:stackdriver][:repo_url] = 'http://repo.stackdriver.com/stackdriver-amazonlinux.repo'
   default[:stackdriver][:config_path] = '/etc/sysconfig/stackdriver'
-when 'redhat', 'centos'
+when 'centos', 'redhat', 'amazon', 'scientific'
   default[:stackdriver][:repo_url] = 'http://repo.stackdriver.com/stackdriver.repo'
   default[:stackdriver][:config_path] = '/etc/sysconfig/stackdriver'
 when 'ubuntu'
