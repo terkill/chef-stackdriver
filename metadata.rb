@@ -7,7 +7,7 @@ long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 version '0.4.1'
 
 # Cookbook dependancies
-%w( yum apt ).each do |cookbooks|
+%w( yum-epel apt ).each do |cookbooks|
   depends cookbooks
 end
 
