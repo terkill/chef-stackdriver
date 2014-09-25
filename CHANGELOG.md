@@ -1,5 +1,12 @@
 # CHANGELOG for stackdriver
 
+## 0.4.2:
+
+* add kitchen test gem
+* add generate hostid
+* add tags
+* use yum-epel cookbook
+
 ## 0.4.1:
 
 * update berkshelf to version 3
