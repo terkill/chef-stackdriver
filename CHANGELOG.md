@@ -1,5 +1,9 @@
 # CHANGELOG for stackdriver
 
+## 0.4.3:
+
+* revise stackdriver_repo url attribute definition
+
 ## 0.4.2:
 
 * add kitchen test gem
