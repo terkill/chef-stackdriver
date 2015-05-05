@@ -23,26 +23,29 @@ default[:stackdriver][:enable] = true
 default[:stackdriver][:gen_hostid] = false
 default[:stackdriver][:tags] = {}
 default[:stackdriver][:gpg_key] = 'https://app.stackdriver.com/RPM-GPG-KEY-stackdriver'
+
 case node[:platform]
 when 'amazon'
-  default[:stackdriver][:repo_url] = 'http://repo.stackdriver.com/stackdriver-amazonlinux.repo'
+  if node[:platform_version].to_f > 2012.09
+    default[:stackdriver][:repo_url] = 'http://repo.stackdriver.com/stackdriver-amazonlinux.repo'
+  else
+    default[:stackdriver][:repo_url] = 'https://repo.stackdriver.com/stackdriver-el6.repo'
+  end
   default[:stackdriver][:config_path] = '/etc/sysconfig/stackdriver'
-when 'centos', 'redhat', 'amazon', 'scientific'
-  default[:stackdriver][:repo_url] = 'http://repo.stackdriver.com/stackdriver.repo'
+when 'centos', 'redhat', 'scientific'
+  default[:stackdriver][:repo_url] = "https://repo.stackdriver.com/stackdriver-el#{node['platform_version'].to_i}.repo"
   default[:stackdriver][:config_path] = '/etc/sysconfig/stackdriver'
 when 'ubuntu'
   case node[:platform_version]
   when '10.04'
     default[:stackdriver][:repo_url] = 'http://repo.stackdriver.com/apt'
     default[:stackdriver][:repo_dist] = 'lucid'
-    default[:stackdriver][:config_path] = '/etc/default/stackdriver-agent'
   when '12.04', '12.10', '13.10'
     default[:stackdriver][:repo_url] = 'http://repo.stackdriver.com/apt'
     default[:stackdriver][:repo_dist] = 'precise'
-    default[:stackdriver][:config_path] = '/etc/default/stackdriver-agent'
   when '14.04'
     default[:stackdriver][:repo_url] = 'http://repo.stackdriver.com/apt'
     default[:stackdriver][:repo_dist] = 'trusty'
-    default[:stackdriver][:config_path] = '/etc/default/stackdriver-agent'
   end
+  default[:stackdriver][:config_path] = '/etc/default/stackdriver-agent'
 end
