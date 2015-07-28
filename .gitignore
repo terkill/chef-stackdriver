@@ -2,8 +2,6 @@
 
 .DS_Store
 *~
-# Bundler
-Gemfile.lock
 
 #RVM
 .rvmrc
