@@ -5,7 +5,7 @@ AllCops:
     - Rakefile
     - Guardfile
   Exclude:
-    - vendor/**
+    - vendor/**/*
 
 ClassLength:
   Enabled: false
