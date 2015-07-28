@@ -38,7 +38,7 @@ describe 'stackdriver::default' do
     let(:chef_run) { ChefSpec::Runner.new(platform: 'centos', version: '6.0').converge(described_recipe) }
 
     it 'expect repo_url' do
-      expect(chef_run.node[:stackdriver][:repo_url]).to eq("https://repo.stackdriver.com/stackdriver-el6.repo")
+      expect(chef_run.node[:stackdriver][:repo_url]).to eq('https://repo.stackdriver.com/stackdriver-el6.repo')
     end
 
     it 'create stackdriver-agent config template' do
