@@ -3,7 +3,7 @@ require 'chefspec/berkshelf'
 
 describe 'stackdriver::default' do
   context 'raise exception' do
-    let(:chef_run) { ChefSpec::Runner.new.converge(described_recipe) }
+    let(:chef_run) { ChefSpec::ServerRunner.new.converge(described_recipe) }
 
     it 'when attributes for platform are not defined' do
       expect(Chef::Formatters::ErrorMapper).to_not receive(:file_load_failed)
@@ -11,10 +11,10 @@ describe 'stackdriver::default' do
     end
   end
   context 'fedora platform' do
-    let(:chef_run) { ChefSpec::Runner.new(platform: 'amazon', version: '2012.09').converge(described_recipe) }
+    let(:chef_run) { ChefSpec::ServerRunner.new(platform: 'amazon', version: '2015.03').converge(described_recipe) }
 
     it 'create yum repo' do
-      expect(chef_run).to create_remote_file('/etc/yum.repos.d/stackdriver.repo')
+      expect(chef_run).to create_yum_repository('stackdriver')
     end
 
     it 'install stackdriver-agent' do
@@ -23,7 +23,7 @@ describe 'stackdriver::default' do
   end
 
   context 'ubuntu platform' do
-    let(:chef_run) { ChefSpec::Runner.new(platform: 'ubuntu', version: '10.04').converge(described_recipe) }
+    let(:chef_run) { ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '14.04').converge(described_recipe) }
 
     it 'create apt repo' do
       expect(chef_run).to add_apt_repository('stackdriver')
@@ -35,7 +35,7 @@ describe 'stackdriver::default' do
   end
 
   context 'general configuration' do
-    let(:chef_run) { ChefSpec::Runner.new(platform: 'centos', version: '6.0').converge(described_recipe) }
+    let(:chef_run) { ChefSpec::ServerRunner.new(platform: 'centos', version: '6.5').converge(described_recipe) }
 
     it 'expect repo_url' do
       expect(chef_run.node[:stackdriver][:repo_url]).to eq('https://repo.stackdriver.com/stackdriver-el6.repo')
@@ -53,7 +53,7 @@ describe 'stackdriver::default' do
 
   context 'action' do
     before do
-      @chef_run = ChefSpec::Runner.new(platform: 'amazon', version: '2012.09')
+      @chef_run = ChefSpec::ServerRunner.new(platform: 'amazon', version: '2015.03')
       @chef_run.node.set[:stackdriver][:action] = :install
       @chef_run.converge(described_recipe)
     end
@@ -64,7 +64,7 @@ describe 'stackdriver::default' do
   end
 
   context 'gen_hostid' do
-    let(:chef_run) { ChefSpec::Runner.new(platform: 'amazon', version: '2012.09') }
+    let(:chef_run) { ChefSpec::ServerRunner.new(platform: 'amazon', version: '2015.03') }
 
     it 'do not execute generate hostid' do
       chef_run.converge(described_recipe)
@@ -90,7 +90,7 @@ describe 'stackdriver::default' do
   end
 
   context 'tags' do
-    let(:chef_run) { ChefSpec::Runner.new(platform: 'amazon', version: '2012.09') }
+    let(:chef_run) { ChefSpec::ServerRunner.new(platform: 'amazon', version: '2015.03') }
 
     it 'do not create template' do
       chef_run.converge(described_recipe)
@@ -118,7 +118,7 @@ describe 'stackdriver::default' do
   end
 
   context 'disable' do
-    let(:chef_run) { ChefSpec::Runner.new(platform: 'amazon', version: '2012.09') }
+    let(:chef_run) { ChefSpec::ServerRunner.new(platform: 'amazon', version: '2015.03') }
 
     before do
       chef_run.node.set[:stackdriver][:enable] = false

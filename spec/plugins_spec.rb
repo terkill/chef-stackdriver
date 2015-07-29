@@ -2,7 +2,7 @@ require 'chefspec'
 require 'chefspec/berkshelf'
 
 describe 'stackdriver::plugins' do
-  let(:chef_run) { ChefSpec::Runner.new(platform: 'amazon', version: '2012.09') }
+  let(:chef_run) { ChefSpec::ServerRunner.new(platform: 'amazon', version: '2015.03') }
 
   it 'include default recipe' do
     chef_run.converge(described_recipe)
