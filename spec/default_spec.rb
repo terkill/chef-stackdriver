@@ -10,11 +10,27 @@ describe 'stackdriver::default' do
       expect { chef_run }.to raise_error('No package repository available for your platform.')
     end
   end
-  context 'fedora platform' do
+  context 'amazon platform' do
     let(:chef_run) { ChefSpec::ServerRunner.new(platform: 'amazon', version: '2015.03').converge(described_recipe) }
+
+    it 'use amazon linux yum repo' do
+      expect(chef_run.node[:stackdriver][:repo_url]).to eq('http://repo.stackdriver.com/repo/amzn-2014.03/$basearch/')
+    end
 
     it 'create yum repo' do
       expect(chef_run).to create_yum_repository('stackdriver')
+    end
+
+    it 'install stackdriver-agent' do
+      expect(chef_run).to upgrade_package('stackdriver-agent')
+    end
+  end
+
+  context 'centos platform' do
+    let(:chef_run) { ChefSpec::ServerRunner.new(platform: 'centos', version: '6.6').converge(described_recipe) }
+
+    it 'expect repo_url' do
+      expect(chef_run.node[:stackdriver][:repo_url]).to eq('https://repo.stackdriver.com/stackdriver-el6.repo')
     end
 
     it 'create yum repo' do
@@ -60,10 +76,6 @@ describe 'stackdriver::default' do
 
   context 'general configuration' do
     let(:chef_run) { ChefSpec::ServerRunner.new(platform: 'centos', version: '6.5').converge(described_recipe) }
-
-    it 'expect repo_url' do
-      expect(chef_run.node[:stackdriver][:repo_url]).to eq('https://repo.stackdriver.com/stackdriver-el6.repo')
-    end
 
     it 'create stackdriver-agent config template' do
       expect(chef_run).to create_template(chef_run.node[:stackdriver][:config_path])
