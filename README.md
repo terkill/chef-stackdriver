@@ -91,15 +91,23 @@ stackdriver::plugins - handles plugin configuration for compatible collectd plug
 
         $ git checkout -b my_bug_fix
 
-4. Run guard: `guard`
+4. Run guard:
+
+        $ bundle exec guard
+
 5. **Write tests**
 6. Make your changes/patches/fixes, committing appropriately
-7. Add your stackdriver api key to the `.kitchen.local.yml` file.
+7. Add a valid stackdriver api key to the `.kitchen.local.yml` file.
+
         provisioner:
           attributes:
             stackdriver:
               api_key: ''
-8. Run `kitchen test`
+
+8. Run kitchen test:
+
+        $ bundle exec kitchen test
+
 9. Push your changes to GitHub
 10. Open a Pull Request
 
