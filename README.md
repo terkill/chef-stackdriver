@@ -73,6 +73,8 @@ password - if a password is required for access.
 * port - port for the redis instance.
 * timeout - time to wait for missing values.
 
+**NOTE**: The redis plugin requires manually running the yum-epel::default recipe on RHEL or other platforms within the family.
+
 # Recipes
 
 stackdriver::default - sets up the repository and installs the stackdriver agent.
