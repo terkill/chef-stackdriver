@@ -42,6 +42,22 @@ describe 'stackdriver::default' do
     end
   end
 
+  context 'debian platform' do
+    let(:chef_run) { ChefSpec::ServerRunner.new(platform: 'debian', version: '6.0.5').converge(described_recipe) }
+
+    it 'set repo_dist' do
+      expect(chef_run.node[:stackdriver][:repo_dist]).to eq('squeeze')
+    end
+
+    it 'create apt repo' do
+      expect(chef_run).to add_apt_repository('stackdriver')
+    end
+
+    it 'install stackdriver-agent' do
+      expect(chef_run).to upgrade_package('stackdriver-agent')
+    end
+  end
+
   context 'general configuration' do
     let(:chef_run) { ChefSpec::ServerRunner.new(platform: 'centos', version: '6.5').converge(described_recipe) }
 

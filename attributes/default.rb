@@ -44,5 +44,17 @@ when 'ubuntu'
   when 14
     default[:stackdriver][:repo_dist] = 'trusty'
   end
+  default[:stackdriver][:repo_url] = 'http://repo.stackdriver.com/apt'
+  default[:stackdriver][:config_path] = '/etc/default/stackdriver-agent'
+when 'debian'
+  case node[:platform_version].to_i
+  when 6
+    default[:stackdriver][:repo_dist] = 'squeeze'
+  when 7
+    default[:stackdriver][:repo_dist] = 'wheezy'
+  when 8
+    default[:stackdriver][:repo_dist] = 'jessie'
+  end
+  default[:stackdriver][:repo_url] = 'http://repo.stackdriver.com/apt'
   default[:stackdriver][:config_path] = '/etc/default/stackdriver-agent'
 end
