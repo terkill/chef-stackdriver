@@ -5,9 +5,17 @@ driver:
 provisioner:
   require_chef_omnibus: true
   name: chef_zero
+  attributes:
+    stackdriver:
+      api_key: '12345'
+      gen_hostid: true
 
 platforms:
-  - name: centos-6.5
+  - name: centos-7.0
+    run_list:
+      - recipe[yum-epel::default]
+  - name: ubuntu-14.04
+  - name: debian-8.0
 
 suites:
   - name: default
@@ -15,30 +23,16 @@ suites:
       - recipe[stackdriver::default]
     attributes:
       stackdriver:
-        api_key: '12345'
-        gen_hostid: true
         tags:
           test1: 1
           test2: 2
-  - name: plugins
+<% %w(apache elasticsearch memcached mongodb nginx redis).each do |name| %>
+  - name: plugins_<%= name %>
     run_list:
-      - recipe[yum-epel::default]
-      - recipe[stackdriver::default]
       - recipe[stackdriver::plugins]
     attributes:
       stackdriver:
-        api_key: '12345'
-        gen_hostid: true
         plugins:
-          apache:
+          <%= name %>:
             enable: true
-          elasticsearch:
-            enable: true
-          memcached:
-            enable: true
-          mongodb:
-            enable: true
-          nginx:
-            enable: true
-          redis:
-            enable: true
+<% end %>

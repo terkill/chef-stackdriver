@@ -92,9 +92,14 @@ stackdriver::plugins - handles plugin configuration for compatible collectd plug
 4. Run guard: `guard`
 5. **Write tests**
 6. Make your changes/patches/fixes, committing appropriately
-7. Run `kitchen test`
-8. Push your changes to GitHub
-9. Open a Pull Request
+7. Add your stackdriver api key to the `.kitchen.local.yml` file.
+        provisioner:
+          attributes:
+            stackdriver:
+              api_key: ''
+8. Run `kitchen test`
+9. Push your changes to GitHub
+10. Open a Pull Request
 
 # Author
 
