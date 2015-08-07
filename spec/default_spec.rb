@@ -29,6 +29,10 @@ describe 'stackdriver::default' do
   context 'ubuntu platform' do
     let(:chef_run) { ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '14.04').converge(described_recipe) }
 
+    it 'set repo_dist' do
+      expect(chef_run.node[:stackdriver][:repo_dist]).to eq('trusty')
+    end
+
     it 'create apt repo' do
       expect(chef_run).to add_apt_repository('stackdriver')
     end

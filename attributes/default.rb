@@ -36,15 +36,12 @@ when 'centos', 'redhat', 'scientific'
   default[:stackdriver][:repo_url] = "http://repo.stackdriver.com/repo/el#{node['platform_version'].to_i}/$basearch/"
   default[:stackdriver][:config_path] = '/etc/sysconfig/stackdriver'
 when 'ubuntu'
-  case node[:platform_version]
-  when '10.04'
-    default[:stackdriver][:repo_url] = 'http://repo.stackdriver.com/apt'
+  case node[:platform_version].to_i
+  when 10, 11
     default[:stackdriver][:repo_dist] = 'lucid'
-  when '12.04', '12.10', '13.10'
-    default[:stackdriver][:repo_url] = 'http://repo.stackdriver.com/apt'
+  when 12, 13
     default[:stackdriver][:repo_dist] = 'precise'
-  when '14.04'
-    default[:stackdriver][:repo_url] = 'http://repo.stackdriver.com/apt'
+  when 14
     default[:stackdriver][:repo_dist] = 'trusty'
   end
   default[:stackdriver][:config_path] = '/etc/default/stackdriver-agent'
