@@ -27,13 +27,13 @@ default[:stackdriver][:gpg_key] = 'https://app.stackdriver.com/RPM-GPG-KEY-stack
 case node[:platform]
 when 'amazon'
   if node[:platform_version].to_f > 2012.09
-    default[:stackdriver][:repo_url] = 'http://repo.stackdriver.com/stackdriver-amazonlinux.repo'
+    default[:stackdriver][:repo_url] = 'http://repo.stackdriver.com/repo/amzn-2014.03/$basearch/'
   else
-    default[:stackdriver][:repo_url] = 'https://repo.stackdriver.com/stackdriver-el6.repo'
+    default[:stackdriver][:repo_url] = 'http://repo.stackdriver.com/repo/el6/$basearch/'
   end
   default[:stackdriver][:config_path] = '/etc/sysconfig/stackdriver'
 when 'centos', 'redhat', 'scientific'
-  default[:stackdriver][:repo_url] = "https://repo.stackdriver.com/stackdriver-el#{node['platform_version'].to_i}.repo"
+  default[:stackdriver][:repo_url] = "http://repo.stackdriver.com/repo/el#{node['platform_version'].to_i}/$basearch/"
   default[:stackdriver][:config_path] = '/etc/sysconfig/stackdriver'
 when 'ubuntu'
   case node[:platform_version]

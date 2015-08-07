@@ -17,6 +17,10 @@ describe 'stackdriver::default' do
       expect(chef_run).to create_yum_repository('stackdriver')
     end
 
+    it 'create yum repo' do
+      expect(chef_run).to create_yum_repository('stackdriver')
+    end
+
     it 'install stackdriver-agent' do
       expect(chef_run).to upgrade_package('stackdriver-agent')
     end

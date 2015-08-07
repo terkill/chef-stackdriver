@@ -35,9 +35,11 @@ end
 
 case node[:platform_family]
 when 'rhel'
-  remote_file '/etc/yum.repos.d/stackdriver.repo' do
-    mode 0644
-    source node[:stackdriver][:repo_url]
+  yum_repository 'stackdriver' do
+    description 'stackdriver repo'
+    baseurl node[:stackdriver][:repo_url]
+    gpgkey node[:stackdriver][:gpg_key]
+    action :create
     only_if { node[:stackdriver][:enable] }
   end
 
