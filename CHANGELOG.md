@@ -1,5 +1,13 @@
 # CHANGELOG for stackdriver
 
+## 0.5.0:
+
+* add circleci support
+* update test kitchen support
+* update elasticsearch plugin
+* update amazon repo package
+* update documentation
+
 ## 0.4.3:
 
 * revise stackdriver_repo url attribute definition
