@@ -1,8 +1,9 @@
 # Managed by Chef.  Local changes will be overwritten.
 LoadPlugin match_regex
 LoadPlugin target_set
-<Chain "PreCache">
-  <Rule>
+PreCacheChain "RenameES"
+<Chain "RenameES">
+  <Rule "rename_es">
     <Match regex>
       Plugin "^curl_json$"
       PluginInstance "elasticsearch"
@@ -16,7 +17,7 @@ LoadPlugin target_set
 
 LoadPlugin "curl_json"
 <Plugin curl_json>
-<URL "<%= @url %>">
+  <URL "<%= @http %><%= @url %><%= @request_stats %>">
     Instance "elasticsearch"
     <Key "nodes/*/indices/docs/count">
       Type "gauge"
@@ -117,5 +118,29 @@ LoadPlugin "curl_json"
     <Key "nodes/*/http/current_open">
       Type "gauge"
     </Key>
+  </URL>
+  <URL "<%= @http %><%= @url %><%= @request_health %>">
+    Instance "elasticsearch"
+    <Key "number_of_nodes">
+      Type "gauge"
+    </Key>
+    <Key "number_of_data_nodes">
+      Type "gauge"
+    </Key>
+      <Key "active_primary_shards">
+              Type "gauge"
+      </Key>
+      <Key "active_shards">
+              Type "gauge"
+      </Key>
+      <Key "relocating_shards">
+              Type "gauge"
+      </Key>
+      <Key "initializing_shards">
+              Type "gauge"
+      </Key>
+      <Key "unassigned_shards">
+              Type "gauge"
+      </Key>
   </URL>
 </Plugin>

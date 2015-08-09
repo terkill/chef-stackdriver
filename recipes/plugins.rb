@@ -41,14 +41,17 @@ end
 
 # Elastic Search plugin
 
-package 'yajl' do
+package node[:stackdriver][:plugins][:elasticsearch][:package] do
   only_if { node[:stackdriver][:plugins][:elasticsearch][:enable] }
 end
 
 template "#{node[:stackdriver][:plugins][:conf_dir]}elasticsearch.conf" do
   source 'elasticsearch.conf.erb'
   variables(
-    :url => node[:stackdriver][:plugins][:elasticsearch][:url]
+    :http => node[:stackdriver][:plugins][:elasticsearch][:http],
+    :url => node[:stackdriver][:plugins][:elasticsearch][:url],
+    :request_stats => node[:stackdriver][:plugins][:elasticsearch][:request_stats],
+    :request_health => node[:stackdriver][:plugins][:elasticsearch][:request_health]
   )
   only_if { node[:stackdriver][:plugins][:elasticsearch][:enable] }
   notifies :restart, 'service[stackdriver-agent]', :delayed

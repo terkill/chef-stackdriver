@@ -24,7 +24,23 @@ default[:stackdriver][:plugins][:apache][:user] = nil
 default[:stackdriver][:plugins][:apache][:password] = nil
 
 default[:stackdriver][:plugins][:elasticsearch][:enable] = false
-default[:stackdriver][:plugins][:elasticsearch][:url] = 'http://localhost:9200/_cluster/nodes/_local/stats?all=true'
+default[:stackdriver][:plugins][:elasticsearch][:http] = 'http://'
+default[:stackdriver][:plugins][:elasticsearch][:url] = 'localhost:9200'
+default[:stackdriver][:plugins][:elasticsearch][:request_stats] = '/_cluster/nodes/_local/stats?all=true'
+default[:stackdriver][:plugins][:elasticsearch][:request_health] = '/_cluster/health'
+default[:stackdriver][:plugins][:elasticsearch][:package] =
+case node[:platform_family]
+when 'debian'
+  case node[:platform]
+  when 'ubuntu'
+    'libyajl1' if node[:platform_version].to_i < 14
+  when 'debian'
+    'libyajl1' if node[:platform_version].to_i < 7
+  end
+  'libyajl2'
+when 'rhel', 'fedora', 'suse'
+  'yajl'
+end
 
 default[:stackdriver][:plugins][:nginx][:enable] = false
 default[:stackdriver][:plugins][:nginx][:url] = 'http://localhost/nginx_status'

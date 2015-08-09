@@ -37,10 +37,16 @@ To use the plugins, change the enable attribute to true and add the stackdriver:
 * user - Mod status username for apache plugin.
 * password - Mod status password for apache plugin.
 
-### elasticcache
+### elasticsearch
 
-* enable - enable the elasticcache plugin. Default is false.
-* url - elastic search status url
+* enable - enable the elasticsearch plugin. Default is false.
+* http - elasticsearch protocol to use
+* url - elasticsearch node url
+* request_stats - the stats request path
+* request_health - the health request path
+* package - which yajl package to install
+
+**NOTE**: This will get statistics for the entire cluster.
 
 ### memcached
 
