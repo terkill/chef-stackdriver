@@ -28,7 +28,7 @@ To use the plugins, change the enable attribute to true and add the stackdriver:
 
 ## plugins
 
-`node[:stackdriver][:plugins]`
+`node['stackdriver']['plugins']`
 
 ### apache
 

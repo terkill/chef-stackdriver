@@ -14,7 +14,7 @@ describe 'stackdriver::default' do
     let(:chef_run) { ChefSpec::ServerRunner.new(platform: 'amazon', version: '2015.03').converge(described_recipe) }
 
     it 'use amazon linux yum repo' do
-      expect(chef_run.node[:stackdriver][:repo_url]).to eq('http://repo.stackdriver.com/repo/amzn-2014.03/$basearch/')
+      expect(chef_run.node['stackdriver']['repo_url']).to eq('http://repo.stackdriver.com/repo/amzn-2014.03/$basearch/')
     end
 
     it 'create yum repo' do
@@ -30,7 +30,7 @@ describe 'stackdriver::default' do
     let(:chef_run) { ChefSpec::ServerRunner.new(platform: 'centos', version: '6.6').converge(described_recipe) }
 
     it 'expect repo_url' do
-      expect(chef_run.node[:stackdriver][:repo_url]).to eq('https://repo.stackdriver.com/stackdriver-el6.repo')
+      expect(chef_run.node['stackdriver']['repo_url']).to eq('http://repo.stackdriver.com/repo/el6/$basearch/')
     end
 
     it 'create yum repo' do
@@ -46,7 +46,7 @@ describe 'stackdriver::default' do
     let(:chef_run) { ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '14.04').converge(described_recipe) }
 
     it 'set repo_dist' do
-      expect(chef_run.node[:stackdriver][:repo_dist]).to eq('trusty')
+      expect(chef_run.node['stackdriver']['repo_dist']).to eq('trusty')
     end
 
     it 'create apt repo' do
@@ -62,7 +62,7 @@ describe 'stackdriver::default' do
     let(:chef_run) { ChefSpec::ServerRunner.new(platform: 'debian', version: '6.0.5').converge(described_recipe) }
 
     it 'set repo_dist' do
-      expect(chef_run.node[:stackdriver][:repo_dist]).to eq('squeeze')
+      expect(chef_run.node['stackdriver']['repo_dist']).to eq('squeeze')
     end
 
     it 'create apt repo' do
@@ -78,11 +78,11 @@ describe 'stackdriver::default' do
     let(:chef_run) { ChefSpec::ServerRunner.new(platform: 'centos', version: '6.5').converge(described_recipe) }
 
     it 'create stackdriver-agent config template' do
-      expect(chef_run).to create_template(chef_run.node[:stackdriver][:config_path])
+      expect(chef_run).to create_template(chef_run.node['stackdriver']['config_path'])
     end
 
     it 'template should notify service' do
-      template = chef_run.template(chef_run.node[:stackdriver][:config_path])
+      template = chef_run.template(chef_run.node['stackdriver']['config_path'])
       expect(template).to notify('service[stackdriver-agent]').to(:restart)
     end
   end
@@ -90,7 +90,7 @@ describe 'stackdriver::default' do
   context 'action' do
     before do
       @chef_run = ChefSpec::ServerRunner.new(platform: 'amazon', version: '2015.03')
-      @chef_run.node.set[:stackdriver][:action] = :install
+      @chef_run.node.set['stackdriver']['action'] = :install
       @chef_run.converge(described_recipe)
     end
 
@@ -110,7 +110,7 @@ describe 'stackdriver::default' do
 
     context 'execute' do
       before do
-        chef_run.node.set[:stackdriver][:gen_hostid] = true
+        chef_run.node.set['stackdriver']['gen_hostid'] = true
         chef_run.converge(described_recipe)
       end
 
@@ -136,7 +136,7 @@ describe 'stackdriver::default' do
 
     context 'template' do
       before do
-        chef_run.node.set[:stackdriver][:tags] = {
+        chef_run.node.set['stackdriver']['tags'] = {
           'test1' => '1',
           'test2' => '2'
         }
@@ -157,7 +157,7 @@ describe 'stackdriver::default' do
     let(:chef_run) { ChefSpec::ServerRunner.new(platform: 'amazon', version: '2015.03') }
 
     before do
-      chef_run.node.set[:stackdriver][:enable] = false
+      chef_run.node.set['stackdriver']['enable'] = false
       chef_run.converge(described_recipe)
     end
 
@@ -175,7 +175,7 @@ describe 'stackdriver::default' do
     end
 
     it 'not to create stackdriver-agent config template' do
-      expect(chef_run).not_to create_template(chef_run.node[:stackdriver][:config_path])
+      expect(chef_run).not_to create_template(chef_run.node['stackdriver']['config_path'])
     end
   end
 end

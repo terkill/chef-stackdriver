@@ -16,35 +16,35 @@ describe 'stackdriver::plugins' do
       end
 
       it 'not create template' do
-        expect(chef_run).to_not create_template("#{chef_run.node[:stackdriver][:plugins][:conf_dir]}apache.conf")
+        expect(chef_run).to_not create_template("#{chef_run.node['stackdriver']['plugins']['conf_dir']}apache.conf")
       end
 
       it 'delete conf file' do
-        expect(chef_run).to delete_file("#{chef_run.node[:stackdriver][:plugins][:conf_dir]}apache.conf")
+        expect(chef_run).to delete_file("#{chef_run.node['stackdriver']['plugins']['conf_dir']}apache.conf")
       end
 
       it 'file notifies service restart' do
-        file = chef_run.file("#{chef_run.node[:stackdriver][:plugins][:conf_dir]}apache.conf")
+        file = chef_run.file("#{chef_run.node['stackdriver']['plugins']['conf_dir']}apache.conf")
         expect(file).to notify('service[stackdriver-agent]').to(:restart).delayed
       end
     end
 
     context 'enabled' do
       before do
-        chef_run.node.set[:stackdriver][:plugins][:apache][:enable] = true
+        chef_run.node.set['stackdriver']['plugins']['apache']['enable'] = true
         chef_run.converge(described_recipe)
       end
 
       it 'to not delete conf file' do
-        expect(chef_run).to_not delete_file("#{chef_run.node[:stackdriver][:plugins][:conf_dir]}apache.conf")
+        expect(chef_run).to_not delete_file("#{chef_run.node['stackdriver']['plugins']['conf_dir']}apache.conf")
       end
 
       it 'create template' do
-        expect(chef_run).to create_template("#{chef_run.node[:stackdriver][:plugins][:conf_dir]}apache.conf")
+        expect(chef_run).to create_template("#{chef_run.node['stackdriver']['plugins']['conf_dir']}apache.conf")
       end
 
       it 'template notifies service restart' do
-        template = chef_run.template("#{chef_run.node[:stackdriver][:plugins][:conf_dir]}apache.conf")
+        template = chef_run.template("#{chef_run.node['stackdriver']['plugins']['conf_dir']}apache.conf")
         expect(template).to notify('service[stackdriver-agent]').to(:restart).delayed
       end
     end
@@ -61,27 +61,27 @@ describe 'stackdriver::plugins' do
       end
 
       it 'not create template' do
-        expect(chef_run).to_not create_template("#{chef_run.node[:stackdriver][:plugins][:conf_dir]}elasticsearch.conf")
+        expect(chef_run).to_not create_template("#{chef_run.node['stackdriver']['plugins']['conf_dir']}elasticsearch.conf")
       end
 
       it 'delete conf file' do
-        expect(chef_run).to delete_file("#{chef_run.node[:stackdriver][:plugins][:conf_dir]}elasticsearch.conf")
+        expect(chef_run).to delete_file("#{chef_run.node['stackdriver']['plugins']['conf_dir']}elasticsearch.conf")
       end
 
       it 'file notifies service restart' do
-        file = chef_run.file("#{chef_run.node[:stackdriver][:plugins][:conf_dir]}elasticsearch.conf")
+        file = chef_run.file("#{chef_run.node['stackdriver']['plugins']['conf_dir']}elasticsearch.conf")
         expect(file).to notify('service[stackdriver-agent]').to(:restart).delayed
       end
     end
 
     context 'enabled' do
       before do
-        chef_run.node.set[:stackdriver][:plugins][:elasticsearch][:enable] = true
+        chef_run.node.set['stackdriver']['plugins']['elasticsearch']['enable'] = true
         chef_run.converge(described_recipe)
       end
 
       it 'to not delete conf file' do
-        expect(chef_run).to_not delete_file("#{chef_run.node[:stackdriver][:plugins][:conf_dir]}elasticsearch.conf")
+        expect(chef_run).to_not delete_file("#{chef_run.node['stackdriver']['plugins']['conf_dir']}elasticsearch.conf")
       end
 
       it 'install yajl' do
@@ -89,11 +89,11 @@ describe 'stackdriver::plugins' do
       end
 
       it 'create template' do
-        expect(chef_run).to create_template("#{chef_run.node[:stackdriver][:plugins][:conf_dir]}elasticsearch.conf")
+        expect(chef_run).to create_template("#{chef_run.node['stackdriver']['plugins']['conf_dir']}elasticsearch.conf")
       end
 
       it 'template notifies service restart' do
-        template = chef_run.template("#{chef_run.node[:stackdriver][:plugins][:conf_dir]}elasticsearch.conf")
+        template = chef_run.template("#{chef_run.node['stackdriver']['plugins']['conf_dir']}elasticsearch.conf")
         expect(template).to notify('service[stackdriver-agent]').to(:restart).delayed
       end
     end
@@ -106,35 +106,35 @@ describe 'stackdriver::plugins' do
       end
 
       it 'not create template' do
-        expect(chef_run).to_not create_template("#{chef_run.node[:stackdriver][:plugins][:conf_dir]}memcached.conf")
+        expect(chef_run).to_not create_template("#{chef_run.node['stackdriver']['plugins']['conf_dir']}memcached.conf")
       end
 
       it 'delete conf file' do
-        expect(chef_run).to delete_file("#{chef_run.node[:stackdriver][:plugins][:conf_dir]}memcached.conf")
+        expect(chef_run).to delete_file("#{chef_run.node['stackdriver']['plugins']['conf_dir']}memcached.conf")
       end
 
       it 'file notifies service restart' do
-        file = chef_run.file("#{chef_run.node[:stackdriver][:plugins][:conf_dir]}memcached.conf")
+        file = chef_run.file("#{chef_run.node['stackdriver']['plugins']['conf_dir']}memcached.conf")
         expect(file).to notify('service[stackdriver-agent]').to(:restart).delayed
       end
     end
 
     context 'enabled' do
       before do
-        chef_run.node.set[:stackdriver][:plugins][:memcached][:enable] = true
+        chef_run.node.set['stackdriver']['plugins']['memcached']['enable'] = true
         chef_run.converge(described_recipe)
       end
 
       it 'to not delete conf file' do
-        expect(chef_run).to_not delete_file("#{chef_run.node[:stackdriver][:plugins][:conf_dir]}memcached.conf")
+        expect(chef_run).to_not delete_file("#{chef_run.node['stackdriver']['plugins']['conf_dir']}memcached.conf")
       end
 
       it 'create template' do
-        expect(chef_run).to create_template("#{chef_run.node[:stackdriver][:plugins][:conf_dir]}memcached.conf")
+        expect(chef_run).to create_template("#{chef_run.node['stackdriver']['plugins']['conf_dir']}memcached.conf")
       end
 
       it 'template notifies service restart' do
-        template = chef_run.template("#{chef_run.node[:stackdriver][:plugins][:conf_dir]}memcached.conf")
+        template = chef_run.template("#{chef_run.node['stackdriver']['plugins']['conf_dir']}memcached.conf")
         expect(template).to notify('service[stackdriver-agent]').to(:restart).delayed
       end
     end
@@ -147,35 +147,35 @@ describe 'stackdriver::plugins' do
       end
 
       it 'not create template' do
-        expect(chef_run).to_not create_template("#{chef_run.node[:stackdriver][:plugins][:conf_dir]}mongodb.conf")
+        expect(chef_run).to_not create_template("#{chef_run.node['stackdriver']['plugins']['conf_dir']}mongodb.conf")
       end
 
       it 'delete conf file' do
-        expect(chef_run).to delete_file("#{chef_run.node[:stackdriver][:plugins][:conf_dir]}mongodb.conf")
+        expect(chef_run).to delete_file("#{chef_run.node['stackdriver']['plugins']['conf_dir']}mongodb.conf")
       end
 
       it 'file notifies service restart' do
-        file = chef_run.file("#{chef_run.node[:stackdriver][:plugins][:conf_dir]}mongodb.conf")
+        file = chef_run.file("#{chef_run.node['stackdriver']['plugins']['conf_dir']}mongodb.conf")
         expect(file).to notify('service[stackdriver-agent]').to(:restart).delayed
       end
     end
 
     context 'enabled' do
       before do
-        chef_run.node.set[:stackdriver][:plugins][:mongodb][:enable] = true
+        chef_run.node.set['stackdriver']['plugins']['mongodb']['enable'] = true
         chef_run.converge(described_recipe)
       end
 
       it 'to not delete conf file' do
-        expect(chef_run).to_not delete_file("#{chef_run.node[:stackdriver][:plugins][:conf_dir]}mongodb.conf")
+        expect(chef_run).to_not delete_file("#{chef_run.node['stackdriver']['plugins']['conf_dir']}mongodb.conf")
       end
 
       it 'create template' do
-        expect(chef_run).to create_template("#{chef_run.node[:stackdriver][:plugins][:conf_dir]}mongodb.conf")
+        expect(chef_run).to create_template("#{chef_run.node['stackdriver']['plugins']['conf_dir']}mongodb.conf")
       end
 
       it 'template notifies service restart' do
-        template = chef_run.template("#{chef_run.node[:stackdriver][:plugins][:conf_dir]}mongodb.conf")
+        template = chef_run.template("#{chef_run.node['stackdriver']['plugins']['conf_dir']}mongodb.conf")
         expect(template).to notify('service[stackdriver-agent]').to(:restart).delayed
       end
     end
@@ -188,35 +188,35 @@ describe 'stackdriver::plugins' do
       end
 
       it 'not create template' do
-        expect(chef_run).to_not create_template("#{chef_run.node[:stackdriver][:plugins][:conf_dir]}nginx.conf")
+        expect(chef_run).to_not create_template("#{chef_run.node['stackdriver']['plugins']['conf_dir']}nginx.conf")
       end
 
       it 'delete conf file' do
-        expect(chef_run).to delete_file("#{chef_run.node[:stackdriver][:plugins][:conf_dir]}nginx.conf")
+        expect(chef_run).to delete_file("#{chef_run.node['stackdriver']['plugins']['conf_dir']}nginx.conf")
       end
 
       it 'file notifies service restart' do
-        file = chef_run.file("#{chef_run.node[:stackdriver][:plugins][:conf_dir]}nginx.conf")
+        file = chef_run.file("#{chef_run.node['stackdriver']['plugins']['conf_dir']}nginx.conf")
         expect(file).to notify('service[stackdriver-agent]').to(:restart).delayed
       end
     end
 
     context 'enabled' do
       before do
-        chef_run.node.set[:stackdriver][:plugins][:nginx][:enable] = true
+        chef_run.node.set['stackdriver']['plugins']['nginx']['enable'] = true
         chef_run.converge(described_recipe)
       end
 
       it 'to not delete conf file' do
-        expect(chef_run).to_not delete_file("#{chef_run.node[:stackdriver][:plugins][:conf_dir]}nginx.conf")
+        expect(chef_run).to_not delete_file("#{chef_run.node['stackdriver']['plugins']['conf_dir']}nginx.conf")
       end
 
       it 'create template' do
-        expect(chef_run).to create_template("#{chef_run.node[:stackdriver][:plugins][:conf_dir]}nginx.conf")
+        expect(chef_run).to create_template("#{chef_run.node['stackdriver']['plugins']['conf_dir']}nginx.conf")
       end
 
       it 'template notifies service restart' do
-        template = chef_run.template("#{chef_run.node[:stackdriver][:plugins][:conf_dir]}nginx.conf")
+        template = chef_run.template("#{chef_run.node['stackdriver']['plugins']['conf_dir']}nginx.conf")
         expect(template).to notify('service[stackdriver-agent]').to(:restart).delayed
       end
     end
@@ -229,43 +229,43 @@ describe 'stackdriver::plugins' do
       end
 
       it 'not install package' do
-        expect(chef_run).to_not install_package(chef_run.node[:stackdriver][:plugins][:redis][:package])
+        expect(chef_run).to_not install_package(chef_run.node['stackdriver']['plugins']['redis']['package'])
       end
 
       it 'not create template' do
-        expect(chef_run).to_not create_template("#{chef_run.node[:stackdriver][:plugins][:conf_dir]}redis.conf")
+        expect(chef_run).to_not create_template("#{chef_run.node['stackdriver']['plugins']['conf_dir']}redis.conf")
       end
 
       it 'delete conf file' do
-        expect(chef_run).to delete_file("#{chef_run.node[:stackdriver][:plugins][:conf_dir]}redis.conf")
+        expect(chef_run).to delete_file("#{chef_run.node['stackdriver']['plugins']['conf_dir']}redis.conf")
       end
 
       it 'file notifies service restart' do
-        file = chef_run.file("#{chef_run.node[:stackdriver][:plugins][:conf_dir]}redis.conf")
+        file = chef_run.file("#{chef_run.node['stackdriver']['plugins']['conf_dir']}redis.conf")
         expect(file).to notify('service[stackdriver-agent]').to(:restart).delayed
       end
     end
 
     context 'enabled' do
       before do
-        chef_run.node.set[:stackdriver][:plugins][:redis][:enable] = true
+        chef_run.node.set['stackdriver']['plugins']['redis']['enable'] = true
         chef_run.converge(described_recipe)
       end
 
       it 'install package' do
-        expect(chef_run).to install_package(chef_run.node[:stackdriver][:plugins][:redis][:package])
+        expect(chef_run).to install_package(chef_run.node['stackdriver']['plugins']['redis']['package'])
       end
 
       it 'to not delete conf file' do
-        expect(chef_run).to_not delete_file("#{chef_run.node[:stackdriver][:plugins][:conf_dir]}redis.conf")
+        expect(chef_run).to_not delete_file("#{chef_run.node['stackdriver']['plugins']['conf_dir']}redis.conf")
       end
 
       it 'create template' do
-        expect(chef_run).to create_template("#{chef_run.node[:stackdriver][:plugins][:conf_dir]}redis.conf")
+        expect(chef_run).to create_template("#{chef_run.node['stackdriver']['plugins']['conf_dir']}redis.conf")
       end
 
       it 'template notifies service restart' do
-        template = chef_run.template("#{chef_run.node[:stackdriver][:plugins][:conf_dir]}redis.conf")
+        template = chef_run.template("#{chef_run.node['stackdriver']['plugins']['conf_dir']}redis.conf")
         expect(template).to notify('service[stackdriver-agent]').to(:restart).delayed
       end
     end

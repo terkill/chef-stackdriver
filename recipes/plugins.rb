@@ -19,98 +19,98 @@
 include_recipe('stackdriver::default')
 
 %w(apache elasticsearch memcached mongodb nginx redis).each do |plugin|
-  file "#{node[:stackdriver][:plugins][:conf_dir]}#{plugin}.conf" do
+  file "#{node['stackdriver']['plugins']['conf_dir']}#{plugin}.conf" do
     action :delete
-    not_if { node[:stackdriver][:plugins][plugin][:enable] }
+    not_if { node['stackdriver']['plugins'][plugin]['enable'] }
     notifies :restart, 'service[stackdriver-agent]', :delayed
   end
 end
 
 # Apache plugin
 
-template "#{node[:stackdriver][:plugins][:conf_dir]}apache.conf" do
+template "#{node['stackdriver']['plugins']['conf_dir']}apache.conf" do
   source 'apache-conf.erb'
   variables(
-    :url => node[:stackdriver][:plugins][:apache][:mod_status_url],
-    :user => node[:stackdriver][:plugins][:apache][:user],
-    :password => node[:stackdriver][:plugins][:apache][:password]
+    :url => node['stackdriver']['plugins']['apache']['mod_status_url'],
+    :user => node['stackdriver']['plugins']['apache']['user'],
+    :password => node['stackdriver']['plugins']['apache']['password']
   )
-  only_if { node[:stackdriver][:plugins][:apache][:enable] }
+  only_if { node['stackdriver']['plugins']['apache']['enable'] }
   notifies :restart, 'service[stackdriver-agent]', :delayed
 end
 
 # Elastic Search plugin
 
-package node[:stackdriver][:plugins][:elasticsearch][:package] do
-  only_if { node[:stackdriver][:plugins][:elasticsearch][:enable] }
+package node['stackdriver']['plugins']['elasticsearch']['package'] do
+  only_if { node['stackdriver']['plugins']['elasticsearch']['enable'] }
 end
 
-template "#{node[:stackdriver][:plugins][:conf_dir]}elasticsearch.conf" do
+template "#{node['stackdriver']['plugins']['conf_dir']}elasticsearch.conf" do
   source 'elasticsearch.conf.erb'
   variables(
-    :http => node[:stackdriver][:plugins][:elasticsearch][:http],
-    :url => node[:stackdriver][:plugins][:elasticsearch][:url],
-    :request_stats => node[:stackdriver][:plugins][:elasticsearch][:request_stats],
-    :request_health => node[:stackdriver][:plugins][:elasticsearch][:request_health]
+    :http => node['stackdriver']['plugins']['elasticsearch']['http'],
+    :url => node['stackdriver']['plugins']['elasticsearch']['url'],
+    :request_stats => node['stackdriver']['plugins']['elasticsearch']['request_stats'],
+    :request_health => node['stackdriver']['plugins']['elasticsearch']['request_health']
   )
-  only_if { node[:stackdriver][:plugins][:elasticsearch][:enable] }
+  only_if { node['stackdriver']['plugins']['elasticsearch']['enable'] }
   notifies :restart, 'service[stackdriver-agent]', :delayed
 end
 
 # MongoDB plugin
 
-template "#{node[:stackdriver][:plugins][:conf_dir]}mongodb.conf" do
+template "#{node['stackdriver']['plugins']['conf_dir']}mongodb.conf" do
   source 'mongodb.conf.erb'
   variables(
-    :host => node[:stackdriver][:plugins][:mongodb][:host],
-    :port => node[:stackdriver][:plugins][:mongodb][:port],
-    :username => node[:stackdriver][:plugins][:mongodb][:username],
-    :password => node[:stackdriver][:plugins][:mongodb][:password],
-    :secondary_query => node[:stackdriver][:plugins][:mongodb][:secondary_query]
+    :host => node['stackdriver']['plugins']['mongodb']['host'],
+    :port => node['stackdriver']['plugins']['mongodb']['port'],
+    :username => node['stackdriver']['plugins']['mongodb']['username'],
+    :password => node['stackdriver']['plugins']['mongodb']['password'],
+    :secondary_query => node['stackdriver']['plugins']['mongodb']['secondary_query']
   )
-  only_if { node[:stackdriver][:plugins][:mongodb][:enable] }
+  only_if { node['stackdriver']['plugins']['mongodb']['enable'] }
   notifies :restart, 'service[stackdriver-agent]', :delayed
 end
 
 # Nginx plugin
 
-template "#{node[:stackdriver][:plugins][:conf_dir]}nginx.conf" do
+template "#{node['stackdriver']['plugins']['conf_dir']}nginx.conf" do
   source 'nginx.conf.erb'
   variables(
-    :url => node[:stackdriver][:plugins][:nginx][:url],
-    :username => node[:stackdriver][:plugins][:nginx][:username],
-    :password => node[:stackdriver][:plugins][:nginx][:password]
+    :url => node['stackdriver']['plugins']['nginx']['url'],
+    :username => node['stackdriver']['plugins']['nginx']['username'],
+    :password => node['stackdriver']['plugins']['nginx']['password']
   )
-  only_if { node[:stackdriver][:plugins][:nginx][:enable] }
+  only_if { node['stackdriver']['plugins']['nginx']['enable'] }
   notifies :restart, 'service[stackdriver-agent]', :delayed
 end
 
 # Redis plugin
 
-package node[:stackdriver][:plugins][:redis][:package] do
-  only_if { node[:stackdriver][:plugins][:redis][:enable] }
+package node['stackdriver']['plugins']['redis']['package'] do
+  only_if { node['stackdriver']['plugins']['redis']['enable'] }
 end
 
-template "#{node[:stackdriver][:plugins][:conf_dir]}redis.conf" do
+template "#{node['stackdriver']['plugins']['conf_dir']}redis.conf" do
   source 'redis.conf.erb'
   variables(
-    :redis_node => node[:stackdriver][:plugins][:redis][:node],
-    :host => node[:stackdriver][:plugins][:redis][:host],
-    :port => node[:stackdriver][:plugins][:redis][:port],
-    :timeout => node[:stackdriver][:plugins][:redis][:timeout]
+    :redis_node => node['stackdriver']['plugins']['redis']['node'],
+    :host => node['stackdriver']['plugins']['redis']['host'],
+    :port => node['stackdriver']['plugins']['redis']['port'],
+    :timeout => node['stackdriver']['plugins']['redis']['timeout']
   )
-  only_if { node[:stackdriver][:plugins][:redis][:enable] }
+  only_if { node['stackdriver']['plugins']['redis']['enable'] }
   notifies :restart, 'service[stackdriver-agent]', :delayed
 end
 
 # Memcache plugin
 
-template "#{node[:stackdriver][:plugins][:conf_dir]}memcached.conf" do
+template "#{node['stackdriver']['plugins']['conf_dir']}memcached.conf" do
   source 'memcached.conf.erb'
   variables(
-    :host => node[:stackdriver][:plugins][:memcached][:host],
-    :port => node[:stackdriver][:plugins][:memcached][:port]
+    :host => node['stackdriver']['plugins']['memcached']['host'],
+    :port => node['stackdriver']['plugins']['memcached']['port']
   )
-  only_if { node[:stackdriver][:plugins][:memcached][:enable] }
+  only_if { node['stackdriver']['plugins']['memcached']['enable'] }
   notifies :restart, 'service[stackdriver-agent]', :delayed
 end

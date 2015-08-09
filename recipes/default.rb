@@ -16,36 +16,36 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-raise 'No package repository available for your platform.' unless node[:stackdriver][:repo_url]
+raise 'No package repository available for your platform.' unless node['stackdriver']['repo_url']
 
 service 'stackdriver-agent' do
   supports :start => true, :stop => true, :status => true, :restart => true, :reload => true
-  action((node[:stackdriver][:enable]) ? :nothing : [:disable, :stop])
+  action((node['stackdriver']['enable']) ? :nothing : [:disable, :stop])
 end
 
-template node[:stackdriver][:config_path] do
+template node['stackdriver']['config_path'] do
   source 'stackdriver-agent.erb'
   variables(
-    :api_key => node[:stackdriver][:api_key],
-    :collectd => node[:stackdriver][:config_collectd]
+    :api_key => node['stackdriver']['api_key'],
+    :collectd => node['stackdriver']['config_collectd']
   )
   notifies :restart, 'service[stackdriver-agent]', :delayed
-  only_if { node[:stackdriver][:enable] }
+  only_if { node['stackdriver']['enable'] }
 end
 
-case node[:platform_family]
+case node['platform_family']
 when 'rhel'
   yum_repository 'stackdriver' do
     description 'stackdriver repo'
-    baseurl node[:stackdriver][:repo_url]
-    gpgkey node[:stackdriver][:gpg_key]
+    baseurl node['stackdriver']['repo_url']
+    gpgkey node['stackdriver']['gpg_key']
     action :create
-    only_if { node[:stackdriver][:enable] }
+    only_if { node['stackdriver']['enable'] }
   end
 
   package 'stackdriver-agent' do
-    action node[:stackdriver][:action]
-    only_if { node[:stackdriver][:enable] }
+    action node['stackdriver']['action']
+    only_if { node['stackdriver']['enable'] }
   end
 
 when 'debian'
@@ -53,32 +53,32 @@ when 'debian'
   include_recipe 'apt'
 
   apt_repository 'stackdriver' do
-    uri node[:stackdriver][:repo_url]
-    distribution node[:stackdriver][:repo_dist]
+    uri node['stackdriver']['repo_url']
+    distribution node['stackdriver']['repo_dist']
     components ['main']
     key 'https://www.stackdriver.com/RPM-GPG-KEY-stackdriver'
-    only_if { node[:stackdriver][:enable] }
+    only_if { node['stackdriver']['enable'] }
   end
 
   package 'stackdriver-agent' do
-    action node[:stackdriver][:action]
+    action node['stackdriver']['action']
     options '--force-yes -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold"'
-    only_if { node[:stackdriver][:enable] }
+    only_if { node['stackdriver']['enable'] }
   end
 end
 
 execute 'generate hostid' do
-  command "/opt/stackdriver/stack-config --api-key #{node[:stackdriver][:api_key]} --genhostid"
+  command "/opt/stackdriver/stack-config --api-key #{node['stackdriver']['api_key']} --genhostid"
   not_if { File.exist? '/opt/stackdriver/hostid' }
-  only_if { node[:stackdriver][:gen_hostid] }
+  only_if { node['stackdriver']['gen_hostid'] }
   notifies :restart, 'service[stackdriver-agent]', :delayed
 end
 
 template '/opt/stackdriver/extractor/etc/extractor.conf.d/tags.conf' do
   source 'tags.conf.erb'
   variables(
-    :tags => node[:stackdriver][:tags]
+    :tags => node['stackdriver']['tags']
   )
-  not_if { node[:stackdriver][:tags].empty? }
+  not_if { node['stackdriver']['tags'].empty? }
   notifies :restart, 'service[stackdriver-agent]', :delayed
 end
