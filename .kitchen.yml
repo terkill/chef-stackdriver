@@ -11,10 +11,15 @@ provisioner:
       gen_hostid: true
 
 platforms:
+  - name: centos-6.6
+    run_list:
+      - recipe[yum-epel::default]
   - name: centos-7.0
     run_list:
       - recipe[yum-epel::default]
+  - name: ubuntu-12.04
   - name: ubuntu-14.04
+  - name: debian-6.0.10
   - name: debian-8.0
 
 suites:
