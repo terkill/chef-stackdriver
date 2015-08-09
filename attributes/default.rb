@@ -32,6 +32,7 @@ when 'amazon'
     default['stackdriver']['repo_url'] = 'http://repo.stackdriver.com/repo/el6/$basearch/'
   end
   default['stackdriver']['config_path'] = '/etc/sysconfig/stackdriver'
+when 'centos', 'redhat', 'scientific' # ~FC024 because amazon is specified in the previous case
   default['stackdriver']['repo_url'] = "http://repo.stackdriver.com/repo/el#{node['platform_version'].to_i}/$basearch/"
   default['stackdriver']['config_path'] = '/etc/sysconfig/stackdriver'
 when 'ubuntu'
