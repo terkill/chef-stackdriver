@@ -1,6 +1,6 @@
 # [Stackdriver](http://www.stackdriver.com/) Chef cookbook
 
-![Build Status](http://img.shields.io/travis/tablexi/chef-stackdriver.svg)
+[![Circle CI](https://circleci.com/gh/tablexi/chef-stackdriver.svg?style=svg)](https://circleci.com/gh/tablexi/chef-stackdriver)
 
 Handles the setup and installation of the stackdriver agent and plugins.
 
