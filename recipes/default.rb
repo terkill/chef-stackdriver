@@ -56,7 +56,7 @@ when 'debian'
     uri node['stackdriver']['repo_url']
     distribution node['stackdriver']['repo_dist']
     components ['main']
-    key 'https://www.stackdriver.com/RPM-GPG-KEY-stackdriver'
+    key node['stackdriver']['gpg_key']
     only_if { node['stackdriver']['enable'] }
   end
 
